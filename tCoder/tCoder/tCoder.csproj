@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{20F67B49-41C0-412C-A2C9-3DD6B6C4E1AF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>tCoder</RootNamespace>
+    <AssemblyName>tCoder</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramBeauty\CPUCurve.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SRM153\Collision.cs" />
+    <Compile Include="SRM155\BenfordsLaw.cs" />
+    <Compile Include="SRM169\FairWorkload.cs" />
+    <Compile Include="SRM174\BirthdayOdds.cs" />
+    <Compile Include="SRM174\ProbabilityTree.cs" />
+    <Compile Include="SRM187\Cyberline.cs" />
+    <Compile Include="SRM189\Mortgage.cs" />
+    <Compile Include="SRM199\ChipRace.cs" />
+    <Compile Include="SRM223\QuizShow.cs" />
+    <Compile Include="SRM226\OneArmedBandit.cs" />
+    <Compile Include="SRM230\SortEstimate.cs" />
+    <Compile Include="SRM258\AutoLoan.cs" />
+    <Compile Include="SRM267\HairCuts.cs" />
+    <Compile Include="SRM277\SandwichBar.cs" />
+    <Compile Include="SRM277\UnionOfIntervals.cs" />
+    <Compile Include="SRM432\GroupedWordChecker.cs" />
+    <Compile Include="SRM432\LampsGrid.cs" />
+    <Compile Include="SRM509\LuckyRemainder.cs" />
+    <Compile Include="TCCC2003Round4\ChessMetric.cs" />
+    <Compile Include="TCO2003Round4\Jewelry.cs" />
+    <Compile Include="TCO2003Semi4\AvoidRoads.cs" />
+    <Compile Include="TCO2004QuaRound3\GeneticCrossovercs.cs" />
+    <Compile Include="TCO2004QuaRound3\Rank.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SRM203\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
