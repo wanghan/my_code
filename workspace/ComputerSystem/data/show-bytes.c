@@ -39,6 +39,6 @@ void test_show_bytes(int val){
 	show_pointer(pval);
 }
 
-int main(){
-	test_show_bytes(12345);
-}
+//int main(){
+//	test_show_bytes(12345);
+//}
