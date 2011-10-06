@@ -51,14 +51,14 @@ void MakeArrayStackEmpty(ArrayStack S) {
 	S->TopOfStack = EmptyTOS;
 }
 
-void Push(ElementType X, ArrayStack S) {
+void PushArrayStack(ElementType X, ArrayStack S) {
 	if (IsArrayStackFull(S)) {
 		Error("Array Stack is full");
 	}
 	S->Array[++S->TopOfStack] = X;
 }
 
-ElementType Top(ArrayStack S) {
+ElementType TopArrayStack(ArrayStack S) {
 	if (IsArrayStackEmpty(S)) {
 		Error("Array Stack is empty");
 		return 0;
@@ -67,7 +67,7 @@ ElementType Top(ArrayStack S) {
 	}
 }
 
-void Pop(ArrayStack S) {
+void PopArrayStack(ArrayStack S) {
 	if (IsArrayStackEmpty(S)) {
 		Error("Array Stack is empty");
 
@@ -75,7 +75,7 @@ void Pop(ArrayStack S) {
 	S->TopOfStack--;
 }
 
-ElementType TopAndPop(ArrayStack S) {
+ElementType TopAndPopArrayStack(ArrayStack S) {
 	ElementType top = 0;
 	if (IsArrayStackEmpty(S)) {
 		Error("Array Stack is empty");

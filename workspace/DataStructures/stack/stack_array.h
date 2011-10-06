@@ -17,9 +17,9 @@ int IsArrayStackFull(ArrayStack S);
 ArrayStack CreateArrayStack(int MaxElements);
 void DisposeArrayStack(ArrayStack S);
 void MakeArrayStackEmpty(ArrayStack S);
-void Push(ElementType X, ArrayStack S);
-ElementType Top(ArrayStack S);
-void Pop(ArrayStack S);
-ElementType TopAndPop(ArrayStack S);
+void PushArrayStack(ElementType X, ArrayStack S);
+ElementType TopArrayStack(ArrayStack S);
+void PopArrayStack(ArrayStack S);
+ElementType TopAndPopArrayStack(ArrayStack S);
 
 #endif /* STACK_ARRAY_H_ */
