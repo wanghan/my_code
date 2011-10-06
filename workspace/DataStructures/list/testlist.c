@@ -11,7 +11,7 @@ void TestMakeList() {
 	int i;
 
 	List l = NULL;
-	l = MakeEmpty(l);
+	l = MakeArrayStackEmpty(l);
 	PrintList(l);
 
 	for (i = 0; i < 10; ++i) {
@@ -29,7 +29,7 @@ void TestList() {
 	Position P;
 	int i;
 
-	L = MakeEmpty(NULL);
+	L = MakeArrayStackEmpty(NULL);
 	P = Header(L);
 	PrintList(L);
 

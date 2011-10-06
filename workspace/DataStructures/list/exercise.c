@@ -34,16 +34,16 @@ void PrintLots(List l, List p) {
 }
 void TestPrintLots() {
 	List l = NULL;
-	l = MakeEmpty(l);
-
-	for (int i = 0; i < 10; ++i) {
+	l = MakeArrayStackEmpty(l);
+	int i=0;
+	for (i = 0; i < 10; ++i) {
 		Insert(i * i, l, l);
 	}
 
 	PrintList(l);
 
 	List p = NULL;
-	p = MakeEmpty(p);
+	p = MakeArrayStackEmpty(p);
 	Insert(7, p, p);
 	Insert(5, p, p);
 	Insert(3, p, p);
@@ -60,7 +60,7 @@ void TestPrintLots() {
 
 List Intersect(List l1, List l2) {
 	List result = NULL;
-	result = MakeEmpty(result);
+	result = MakeArrayStackEmpty(result);
 	Position curInsertPos = result;
 	Position p1 = First(l1);
 	Position p2 = First(l2);
@@ -82,7 +82,7 @@ List Intersect(List l1, List l2) {
 
 List Union(List l1, List l2) {
 	List result = NULL;
-	result = MakeEmpty(result);
+	result = MakeArrayStackEmpty(result);
 	Position curInsertPos = result;
 	Position p1 = First(l1);
 	Position p2 = First(l2);
@@ -117,14 +117,14 @@ List Union(List l1, List l2) {
 void TestIntersectAndUnion() {
 	// make list 1
 	List l1 = NULL;
-	l1 = MakeEmpty(l1);
+	l1 = MakeArrayStackEmpty(l1);
 	Position curl1 = l1;
 	for (int i = 0; i < 100; ++i) {
 		curl1 = Insert(i * 3, l1, curl1);
 	}
 	//make list 2
 	List l2 = NULL;
-	l2 = MakeEmpty(l2);
+	l2 = MakeArrayStackEmpty(l2);
 	Position curl2 = l2;
 	for (int i = 0; i < 100; ++i) {
 		curl2 = Insert(i * 5, l2, curl2);
@@ -152,7 +152,7 @@ void Josephus(int n, int m) {
 
 	//make list
 	List result = NULL;
-	result = MakeEmpty(result);
+	result = MakeArrayStackEmpty(result);
 	Position curInsertPos = result;
 	for (int i = 1; i <= n; ++i) {
 		curInsertPos = Insert(i, result, curInsertPos);
@@ -194,7 +194,7 @@ Position FindRecursively(int x, Position l) {
 void TestFindRecursively() {
 	// make list 1
 	List l1 = NULL;
-	l1 = MakeEmpty(l1);
+	l1 = MakeArrayStackEmpty(l1);
 	Position curl1 = l1;
 	for (int i = 0; i < 30000; ++i) {
 		curl1 = Insert(i * 3, l1, curl1);
@@ -216,7 +216,7 @@ void TestFindRecursively() {
  * reverse list
  */
 void ReverseList(List l) {
-	if (IsEmpty(l)) {
+	if (IsListEmpty(l)) {
 		return;
 	}
 	Position cur = First(l);
@@ -233,7 +233,7 @@ void ReverseList(List l) {
 void TestReverseList() {
 	// make list 1
 	List l1 = NULL;
-	l1 = MakeEmpty(l1);
+	l1 = MakeArrayStackEmpty(l1);
 	Position curl1 = l1;
 	for (int i = 0; i < 1; ++i) {
 		curl1 = Insert(i * 3, l1, curl1);

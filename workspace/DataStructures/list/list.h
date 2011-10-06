@@ -27,9 +27,9 @@ struct Node {
 /**
  *
  */
-List MakeEmpty(List L);
+List MakeArrayStackEmpty(List L);
 
-int IsEmpty(List L);
+int IsListEmpty(List L);
 
 int IsLast(Position p, List l);
 

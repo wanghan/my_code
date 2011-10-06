@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 
-List MakeEmpty(List L) {
+List MakeListEmpty(List L) {
 	if (L != NULL) {
 		DeleteList(L);
 	}
@@ -23,10 +23,7 @@ List MakeEmpty(List L) {
 	return L;
 }
 
-/**
- *
- */
-int IsEmpty(List L) {
+int IsListEmpty(List L) {
 	return L->Next == NULL;
 }
 
@@ -49,7 +46,7 @@ Position Find(ElementType x, List l) {
 }
 
 void Delete(ElementType x, List l) {
-	if (IsEmpty(l)) {
+	if (IsListEmpty(l)) {
 		Error("List is empty");
 	} else {
 		Position previous = FindPerious(x, l);
