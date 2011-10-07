@@ -45,10 +45,11 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="tree"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="stack"/>
-<entry excluding="queue|stack|list|list_int" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="list"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="queue"/>
+<entry excluding="tree|queue|stack|list|list_int" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="list"/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -345,10 +346,11 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="queue|stack|list|list_int" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="stack"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="tree"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="queue"/>
+<entry excluding="tree|queue|stack|list|list_int" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="list"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="stack"/>
 </sourceEntries>
 </configuration>
 </storageModule>

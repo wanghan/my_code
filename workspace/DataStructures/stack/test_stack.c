@@ -17,6 +17,6 @@ void TestStackArray() {
 	DisposeArrayStack(S);
 	return;
 }
-int main(){
-	TestStackArray();
-}
+//int main(){
+//	TestStackArray();
+//}
