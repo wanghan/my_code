@@ -10,14 +10,14 @@
 
 int main() {
 	BinarySearchTree T;
-	Position P;
+	TreePosition P;
 	int i;
 	int j = 0;
 
 	T = MakeBSTEmpty(NULL);
 	for (i = 0; i < 50; i++, j = (j + 7) % 50)
 		T = InsertBST(j, T);
-	for (i = 0; i < 50; i++)Min is 1, Max is 49
+	for (i = 0; i < 50; i++)
 
 		if ((P = FindInBST(i, T)) == NULL || RetrieveBST(P) != i)
 			printf("Error at %d\n", i);

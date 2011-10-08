@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 
+
 List MakeListEmpty(List L) {
 	if (L != NULL) {
 		DeleteList(L);

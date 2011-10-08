@@ -14,6 +14,7 @@ struct Node;
 typedef struct Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
+
 /**
  * define Node
  */
@@ -21,8 +22,6 @@ struct Node {
 	ElementType Element;
 	Position Next;
 };
-
-
 
 /**
  *

@@ -23,7 +23,7 @@ BinarySearchTree MakeBSTEmpty(BinarySearchTree T) {
 	}
 	return NULL;
 }
-Position FindInBST(ElementType X, BinarySearchTree T) {
+TreePosition FindInBST(ElementType X, BinarySearchTree T) {
 	if (T == NULL) {
 		return NULL;
 	}
@@ -35,7 +35,7 @@ Position FindInBST(ElementType X, BinarySearchTree T) {
 		return FindInBST(X, T->Right);
 	}
 }
-Position FindMinInBST(BinarySearchTree T) {
+TreePosition FindMinInBST(BinarySearchTree T) {
 	if (T == NULL) {
 		return NULL;
 	}
@@ -45,7 +45,7 @@ Position FindMinInBST(BinarySearchTree T) {
 		return FindMinInBST(T->Left);
 	}
 }
-Position FindMaxInBST(BinarySearchTree T) {
+TreePosition FindMaxInBST(BinarySearchTree T) {
 	if (T == NULL) {
 		return NULL;
 	}
@@ -77,7 +77,7 @@ BinarySearchTree InsertBST(ElementType X, BinarySearchTree T) {
 	return T;
 }
 BinarySearchTree DeleteBST(ElementType X, BinarySearchTree T) {
-	Position TmpCell;
+	TreePosition TmpCell;
 
 	if (T == NULL) {
 		Error( "Element not found" );
@@ -107,6 +107,6 @@ BinarySearchTree DeleteBST(ElementType X, BinarySearchTree T) {
 	}
 	return T;
 }
-ElementType RetrieveBST(Position P) {
+ElementType RetrieveBST(TreePosition P) {
 	return P->Element;
 }

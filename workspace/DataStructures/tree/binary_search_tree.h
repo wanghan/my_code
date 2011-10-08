@@ -11,15 +11,15 @@
 typedef int ElementType;
 
 struct TreeNode;
-typedef struct TreeNode *Position;
+typedef struct TreeNode *TreePosition;
 typedef struct TreeNode *BinarySearchTree;
 
 BinarySearchTree MakeBSTEmpty(BinarySearchTree T);
-Position FindInBST(ElementType X, BinarySearchTree T);
-Position FindMinInBST(BinarySearchTree T);
-Position FindMaxInBST(BinarySearchTree T);
+TreePosition FindInBST(ElementType X, BinarySearchTree T);
+TreePosition FindMinInBST(BinarySearchTree T);
+TreePosition FindMaxInBST(BinarySearchTree T);
 BinarySearchTree InsertBST(ElementType X, BinarySearchTree T);
 BinarySearchTree DeleteBST(ElementType X, BinarySearchTree T);
-ElementType RetrieveBST(Position P);
+ElementType RetrieveBST(TreePosition P);
 
 #endif /* BINARY_TREE_H_ */

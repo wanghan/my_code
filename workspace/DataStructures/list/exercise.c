@@ -10,11 +10,14 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+
+
 /*
  * exercise 3.2
  * P is a list with increasing order,
  * print all ele in L where position of ele is indicated in P
  */
+
 void PrintLots(List l, List p) {
 	int l_index = 0;
 

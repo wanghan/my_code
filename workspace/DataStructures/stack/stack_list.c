@@ -11,6 +11,8 @@
 int IsListStackEmpty(ListStack S) {
 	return IsListEmpty(S);
 }
+
+
 ListStack CreateListStack(void) {
 	ListStack result = NULL;
 	result = malloc(sizeof(struct Node));
