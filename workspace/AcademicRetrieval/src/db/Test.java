@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.dom4j.DocumentException;
+import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
+
+import dao.test.CityDAO;
 
 import act.corpus.ACMCorpusLoader;
 import actm.data.ACTMDataSet;
@@ -17,26 +20,16 @@ import actm.data.Paper;
 
 public class Test {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		try {
-			Configuration config=new Configuration();
-			
-			
-			Connection conn = MysqlConnection.getConnection();
-			DBOperations oper = new DBOperations(conn);
-			Paper p=oper.getPaperById(11);
-			
-			System.out.println(1);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-
+		CityDAO cityDAO = new CityDAO();
+		long cityId1 = cityDAO.saveCity("New York");
+		long cityId2 = cityDAO.saveCity("Rio de Janeiro");
+		long cityId3 = cityDAO.saveCity("Tokyo");
+		long cityId4 = cityDAO.saveCity("London");
+		cityDAO.listCities();
+		cityDAO.updateCity(cityId4, "Paris");
+		cityDAO.deleteCity(cityId3);
+		cityDAO.listCities();
 	}
 
 	public static void testInsertConfs() throws DocumentException,
@@ -55,7 +48,7 @@ public class Test {
 	}
 
 	public static void testInsertPapers() throws DocumentException,
-	IOException, SQLException {
+			IOException, SQLException {
 		Connection conn = MysqlConnection.getConnection();
 		DBOperations oper = new DBOperations(conn);
 		ACTMGlobalData globalData = new ACTMGlobalData();
@@ -63,18 +56,18 @@ public class Test {
 				globalData, null);
 		ACTMDataSet testData = new ACMCorpusLoader().loadTestData_Small(
 				globalData, null);
-		globalData.serialize("./"+System.currentTimeMillis()+".glo");
-		int i=0;
-//		for (ACTMDocument paper : data.documentSet) {
-//				i++;
-//				if(i>=20000){
-//					oper.insertPaper(paper.getPaper());
-//					System.out.println("Insert paper :"+paper.getPaper().getTitle());
-//				}		
-//		}
+		globalData.serialize("./" + System.currentTimeMillis() + ".glo");
+		int i = 0;
+		// for (ACTMDocument paper : data.documentSet) {
+		// i++;
+		// if(i>=20000){
+		// oper.insertPaper(paper.getPaper());
+		// System.out.println("Insert paper :"+paper.getPaper().getTitle());
+		// }
+		// }
 		for (ACTMDocument paper : testData.documentSet) {
-			oper.insertPaper(paper.getPaper(),paper.getIndex());
-			System.out.println("Insert paper :"+paper.getPaper().getTitle());
+			oper.insertPaper(paper.getPaper(), paper.getIndex());
+			System.out.println("Insert paper :" + paper.getPaper().getTitle());
 		}
 	}
 }
