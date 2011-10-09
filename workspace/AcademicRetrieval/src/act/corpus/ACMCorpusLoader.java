@@ -32,7 +32,6 @@ public class ACMCorpusLoader {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-
 			ACTMGlobalData globalData=new ACTMGlobalData();
 			ACTMDataSet datas=new ACMCorpusLoader().loadTrainData_Small(globalData,null);
 			

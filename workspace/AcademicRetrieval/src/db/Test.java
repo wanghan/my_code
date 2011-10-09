@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.dom4j.DocumentException;
+import org.hibernate.cfg.Configuration;
 
 import act.corpus.ACMCorpusLoader;
 import actm.data.ACTMDataSet;
@@ -22,6 +23,9 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
+			Configuration config=new Configuration();
+			
+			
 			Connection conn = MysqlConnection.getConnection();
 			DBOperations oper = new DBOperations(conn);
 			Paper p=oper.getPaperById(11);
