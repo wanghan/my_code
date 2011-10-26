@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="actm.data">
+	<class
+		name="Conference"
+		table="conference"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="integer"
+			column="id"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="Name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="Index"
+			column="index"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="GlobalIndex"
+			column="global_index"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="GlobalName"
+			column="global_name"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="Date"
+			column="date"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

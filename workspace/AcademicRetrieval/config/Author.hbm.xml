@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="actm.data">
+	<class
+		name="Author"
+		table="author"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="integer"
+			column="id"
+		>
+			<generator class="sequence"/>
+		</id>
+
+		<property
+			name="Name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="Link"
+			column="link"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="AcmIndex"
+			column="acm_index"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="Index"
+			column="index"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<set name="Papers"
+             table="paper_authors"
+             cascade="all">
+            <!--column="personid"指定连接表中关联当前实体类的列名-->
+            <key column="author_id" not-null="true"/>
+            <!--column="addressid"是连接表中关联本实体的外键-->
+            <many-to-many column="paper_id"
+                          class="actm.data.Paper"/>
+        </set>
+
+	</class>	
+</hibernate-mapping>
