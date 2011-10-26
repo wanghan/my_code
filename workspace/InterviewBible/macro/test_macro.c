@@ -16,9 +16,9 @@ typedef struct student {
 	double c;
 }student;
 
-int main() {
-	//test macro FIND
-	int offset=FIND(student,c);
-	printf("%d\n",offset);
-
-}
+//int main() {
+//	//test macro FIND
+//	int offset=FIND(student,c);
+//	printf("%d\n",offset);
+//
+//}
