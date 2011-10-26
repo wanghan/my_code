@@ -7,9 +7,12 @@ import java.sql.SQLException;
 
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import dao.test.City;
 import dao.test.CityDAO;
+import dao.test.HibernateUtil;
 
 import act.corpus.ACMCorpusLoader;
 import actm.data.ACTMDataSet;
@@ -21,6 +24,10 @@ import actm.data.Paper;
 public class Test {
 
 	public static void main(String[] args) {
+
+	}
+
+	public static void testCityDAO() {
 		CityDAO cityDAO = new CityDAO();
 		long cityId1 = cityDAO.saveCity("New York");
 		long cityId2 = cityDAO.saveCity("Rio de Janeiro");
@@ -69,5 +76,42 @@ public class Test {
 			oper.insertPaper(paper.getPaper(), paper.getIndex());
 			System.out.println("Insert paper :" + paper.getPaper().getTitle());
 		}
+	}
+
+	public static void testInsertPapersHibernate() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		Long cityId = null;
+		try {
+			ACTMGlobalData globalData = new ACTMGlobalData();
+			ACTMDataSet data = new ACMCorpusLoader().loadTrainData_Small(
+					globalData, null);
+			ACTMDataSet testData = new ACMCorpusLoader().loadTestData_Small(
+					globalData, null);
+			globalData.serialize("./" + System.currentTimeMillis() + ".glo");
+			int i = 0;
+			// for (ACTMDocument paper : data.documentSet) {
+			// i++;
+			// if(i>=20000){
+			// oper.insertPaper(paper.getPaper());
+			// System.out.println("Insert paper :"+paper.getPaper().getTitle());
+			// }
+			// }
+			int k=0;
+			for (ACTMDocument paper : testData.documentSet) {
+				if(k++<50)
+					break;
+				paper.getPaper().Index=paper.getIndex();
+				cityId = (Long) session.save(paper.getPaper());
+				
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
 	}
 }

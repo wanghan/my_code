@@ -31,6 +31,7 @@ public class Paper implements Serializable{
 	private Conference conference;
 	private int id;  //db table key id
 	public double[] topicWeight;
+	public int Index;
 	
 	public Paper() {
 		// TODO Auto-generated constructor stub
