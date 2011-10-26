@@ -27,7 +27,7 @@ public class DocumentMaker {
 				Field.Index.NOT_ANALYZED));
 		doc.add(new Field(IndexFields.Length, String.valueOf(paper.getBagOfWordSize()),
 				Field.Store.YES, Field.Index.NOT_ANALYZED));
-		doc.add(new Field(IndexFields.CONTENTS, paper.getPaper().getAbstractContent().toLowerCase(), Field.Store.YES,
+		doc.add(new Field(IndexFields.CONTENTS, paper.getPaper().getAbstract().toLowerCase(), Field.Store.YES,
 				Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
 
 		// return the document

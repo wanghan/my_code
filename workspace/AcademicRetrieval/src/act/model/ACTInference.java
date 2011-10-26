@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Vector;
 
 import org.dom4j.DocumentException;
@@ -19,6 +20,7 @@ import act.corpus.ACMCorpusLoader;
 import actm.data.ACTMDataSet;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
+import actm.data.Author;
 import atm.labeling.LabelingUtils;
 import atm.labeling.Parse;
 
@@ -188,9 +190,10 @@ public class ACTInference {
 					double [] topicSum=new double[Model.T];
 					
 					
-					
-					for(int j=0;j<curDoc.getAuthors().size();++j){
-						int authorIndex=curDoc.getAuthors().get(j).getIndex();
+					Iterator<Author> ita=curDoc.getAuthors().iterator();
+					while(ita.hasNext()){
+						Author curA=ita.next();
+						int authorIndex=curA.getIndex();
 						
 						
 						for(int k=0;k<Model.T;++k){
@@ -200,8 +203,8 @@ public class ACTInference {
 							
 							totalProb+=probs;
 							
-							authorSum[j]+=probs;
-							topicSum[k]+=probs;
+							authorSum[curA.getIndex()]+=probs;
+							topicSum[curA.getIndex()]+=probs;
 						}
 					}
 					 
@@ -212,10 +215,12 @@ public class ACTInference {
 					int newAuthor=-1,newTopic=-1;
 					
 					double max=0;
-					for(int j=0;j<curDoc.getAuthors().size();++j){
-						max+=authorSum[j];
+					Iterator<Author> ita1=curDoc.getAuthors().iterator();
+					while(ita.hasNext()){
+						Author curA=ita1.next();
+						max+=authorSum[curA.getIndex()];
 						if(max>=r){
-							newAuthor=curDoc.getAuthors().get(j).getIndex();
+							newAuthor=curA.getIndex();
 							break;
 						}
 					}

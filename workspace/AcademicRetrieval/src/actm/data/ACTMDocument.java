@@ -4,6 +4,7 @@
 package actm.data;
 
 import java.io.Serializable;
+import java.util.Set;
 import java.util.Vector;
 
 import tm.generalmodel.Word;
@@ -25,7 +26,7 @@ public class ACTMDocument implements Serializable{
 	private int index;
 	private Vector<Word> bagOfWords;
 	private Vector<Integer> bagOfWordGloIndexes;
-	
+	private Vector<Author> authors;
 
 	
 	public ACTMDocument(Paper p, int index) {
@@ -34,6 +35,7 @@ public class ACTMDocument implements Serializable{
 		this.bagOfWords=new Vector<Word>();
 		this.bagOfWordGloIndexes=new Vector<Integer>();
 		this.index=index;
+		this.authors=null;
 	}
 
 	public Paper getPaper() {
@@ -50,7 +52,11 @@ public class ACTMDocument implements Serializable{
 	}
 	
 	public Vector<Author> getAuthors(){
-		return this.paper.getAuthors();
+		if(authors==null){
+			authors=new Vector<Author>();
+			authors.addAll(this.paper.getAuthors());
+		}
+		return authors;
 	}
 
 	public Vector<Word> getBagOfWords() {
@@ -73,6 +79,6 @@ public class ACTMDocument implements Serializable{
 	}
 	
 	public String getContent(){
-		return (paper.getTitle()+" "+paper.getAbstractContent()).toLowerCase();
+		return (paper.getTitle()+" "+paper.getAbstract()).toLowerCase();
 	}
 }

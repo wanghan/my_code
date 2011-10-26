@@ -24,7 +24,7 @@ import actm.data.Paper;
 public class Test {
 
 	public static void main(String[] args) {
-
+		testInsertPapersHibernate();
 	}
 
 	public static void testCityDAO() {
@@ -83,6 +83,7 @@ public class Test {
 		Transaction transaction = null;
 		Long cityId = null;
 		try {
+			transaction = session.beginTransaction();
 			ACTMGlobalData globalData = new ACTMGlobalData();
 			ACTMDataSet data = new ACMCorpusLoader().loadTrainData_Small(
 					globalData, null);
@@ -99,10 +100,10 @@ public class Test {
 			// }
 			int k=0;
 			for (ACTMDocument paper : testData.documentSet) {
-				if(k++<50)
+				if(k++>50)
 					break;
-				paper.getPaper().Index=paper.getIndex();
-				cityId = (Long) session.save(paper.getPaper());
+	
+				session.save(paper.getPaper().getConference());
 				
 			}
 			transaction.commit();

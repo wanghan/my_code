@@ -14,9 +14,16 @@
 			type="integer"
 			column="id"
 		>
-			<generator class="sequence"/>
+			<generator class="native"/>
 		</id>
 
+		<property
+			name="Title"
+			column="title"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
 		<property
 			name="Pages"
 			column="pages"
@@ -60,7 +67,7 @@
 		/>
 		<property
 			name="Index"
-			column="index"
+			column="tm_index"
 			type="integer"
 			not-null="true"
 			length="10"
@@ -72,6 +79,7 @@
 			not-null="true"
 		>
 		</many-to-one>
+
 		<set name="Authors"
              table="paper_authors"
              cascade="all">
@@ -81,6 +89,5 @@
             <many-to-many column="author_id"
                           class="actm.data.Author"/>
         </set>
-
 	</class>	
 </hibernate-mapping>

@@ -14,19 +14,19 @@
 			type="integer"
 			column="id"
 		>
-			<generator class="sequence"/>
+			<generator class="native"/>
 		</id>
 
 		<property
 			name="Name"
-			column="name"
+			column="conf_name"
 			type="string"
 			not-null="true"
 			length="255"
 		/>
 		<property
 			name="Index"
-			column="index"
+			column="tm_index"
 			type="integer"
 			not-null="true"
 			length="10"

@@ -14,7 +14,7 @@
 			type="integer"
 			column="id"
 		>
-			<generator class="sequence"/>
+			<generator class="native"/>
 		</id>
 
 		<property
@@ -40,7 +40,7 @@
 		/>
 		<property
 			name="Index"
-			column="index"
+			column="tm_index"
 			type="integer"
 			not-null="true"
 			length="10"

@@ -29,12 +29,12 @@ public class RudeDataGenerater {
 			File fileout =new File(file);
 			FileWriter writer=new FileWriter(fileout);
 			for (ACTMDocument doc : datas.documentSet) {
-				writer.write(doc.getPaper().getAbstractContent());
+				writer.write(doc.getPaper().getAbstract());
 				writer.write("\r\n");
 				writer.flush();
 			}
 			for (ACTMDocument doc : testdatas.documentSet) {
-				writer.write(doc.getPaper().getAbstractContent());
+				writer.write(doc.getPaper().getAbstract());
 				writer.write("\r\n");
 				writer.flush();
 			}

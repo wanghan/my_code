@@ -39,7 +39,7 @@ public class DBOperations {
 		
 		sqlCom.append("'"+String.valueOf(tmIndex)+"' ,");
 		sqlCom.append("'"+paper.getTitle().replace('\'', ' ').trim()+"' ,");
-		sqlCom.append("'"+paper.getAbstractContent().replace('\'', ' ').trim()+"' ,");
+		sqlCom.append("'"+paper.getAbstract().replace('\'', ' ').trim()+"' ,");
 		sqlCom.append("'"+paper.getDoi()+"' ,");
 		sqlCom.append("'"+paper.getDoiLink()+"' ,");
 		sqlCom.append("'"+paper.getLink().trim()+"' ,");
@@ -145,7 +145,7 @@ public class DBOperations {
 		}
 		else{
 			Paper re=new Paper();
-			re.setAbstractContent(result.getString("abstract"));
+			re.setAbstract(result.getString("abstract"));
 			re.setId(result.getInt("id"));
 			re.setId(result.getInt("id"));
 			re.setTitle(result.getString("title"));

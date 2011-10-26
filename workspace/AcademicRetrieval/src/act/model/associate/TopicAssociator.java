@@ -5,12 +5,14 @@ package act.model.associate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import utils.IndexValuePairSorting;
 import utils.KeyValuePair;
 import utils.SerializeUtils;
 import act.model.ACTModel;
 import actm.data.ACTMDocument;
+import actm.data.Author;
 import actm.data.Topic;
 
 /**
@@ -56,8 +58,10 @@ public class TopicAssociator {
 			}
 			for (ACTMDocument doc : model.dataSet.documentSet) {
 				docWeight[doc.getIndex()]=0.0;
-				for(int j=0;j<doc.getPaper().getAuthors().size();++j){
-					docWeight[doc.getIndex()]+=model.theta[i][doc.getPaper().getAuthors().get(j).getIndex()];
+				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
+				while(ita.hasNext()){
+					Author cur=ita.next();
+					docWeight[doc.getIndex()]+=model.theta[i][cur.getIndex()];
 				}
 				docWeight[doc.getIndex()]/=doc.getPaper().getAuthors().size();
 			}
@@ -93,8 +97,10 @@ public class TopicAssociator {
 				docWeight[i]=0.0;
 			}
 			for (int i = 0; i < model.T; ++i) {
-				for(int j=0;j<doc.getPaper().getAuthors().size();++j){
-					docWeight[i]+=model.theta[i][doc.getPaper().getAuthors().get(j).getIndex()];
+				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
+				while(ita.hasNext()){
+					Author cur=ita.next();
+					docWeight[doc.getIndex()]+=model.theta[i][cur.getIndex()];
 				}
 				docWeight[i]/=doc.getPaper().getAuthors().size();
 			}

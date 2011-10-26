@@ -5,6 +5,8 @@ package cache;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
+
 import act.model.ACTModel;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
@@ -99,8 +101,10 @@ public class RAMDictionary implements Serializable{
 			doc.getPaper().topicWeight=new  double[model.T]; 
 			for(int i=0;i<model.T;++i){
 				doc.getPaper().topicWeight[i]=0;
-				for(int j=0;j<doc.getPaper().getAuthors().size();++j){
-					doc.getPaper().topicWeight[i]+=model.theta[i][doc.getPaper().getAuthors().get(j).getIndex()];
+				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
+				while(ita.hasNext()){
+					Author cur=ita.next();
+					doc.getPaper().topicWeight[i]+=model.theta[i][cur.getIndex()];
 				}
 				doc.getPaper().topicWeight[i]/=doc.getPaper().getAuthors().size();
 			}

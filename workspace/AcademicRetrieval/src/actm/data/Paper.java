@@ -1,10 +1,14 @@
 package actm.data;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
+
+import actm.data.base.BasePaper;
 
 /**
  * 
@@ -14,111 +18,20 @@ import org.dom4j.tree.BaseElement;
  * @author wanghan
  *
  */
-public class Paper implements Serializable{
+public class Paper extends BasePaper{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1112339929366144895L;
-	private String title;
-	private Vector<Author> authors;
-	private String pages;
-	private String abstractContent;
-	private String source;
-	private String link;
-	private String doi;
-	private String doiLink;
-	private Conference conference;
-	private int id;  //db table key id
 	public double[] topicWeight;
-	public int Index;
 	
 	public Paper() {
 		// TODO Auto-generated constructor stub
-		this.doi="";
-		this.doiLink="";
-		this.id=-1;
+		this.setDoi("");
+		this.setDoiLink("");
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Vector<Author> getAuthors() {
-		return authors;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setAuthors(Vector<Author> authors) {
-		this.authors = authors;
-	}
-
-	public String getPages() {
-		return pages;
-	}
-
-	public void setPages(String pages) {
-		this.pages = pages;
-	}
-
-	public String getAbstractContent() {
-		return abstractContent;
-	}
-
-	public void setAbstractContent(String abstractContent) {
-		this.abstractContent = abstractContent;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	public String getDoi() {
-		return doi;
-	}
-
-	public void setDoi(String doi) {
-		this.doi = doi;
-	}
-
-	public String getDoiLink() {
-		return doiLink;
-	}
-
-	public void setDoiLink(String doiLink) {
-		this.doiLink = doiLink;
-	}
-
-	public Conference getConference() {
-		return conference;
-	}
-
-	public void setConference(Conference conference) {
-		this.conference = conference;
-	}
 	
 	public Element toXMLElement(){
 		Element root=new BaseElement("article");
@@ -126,14 +39,14 @@ public class Paper implements Serializable{
 //		idNode.addText(String.valueOf(this.id));
 		
 		Element titleNode=root.addElement("title");
-		titleNode.addText(this.title);
+		titleNode.addText(this.getTitle());
 		
 //		Element confNode=root.addElement("conference");
 //		confNode.addText(this.conference.getName());
 //		confNode.addAttribute("date", conference.getDate().toString());
 		
 		Element pageNode=root.addElement("page");
-		pageNode.addText(this.pages);
+		pageNode.addText(this.getPages());
 		
 //		Element authorNode=root.addElement("authors");
 //		for (Author author : this.authors) {
@@ -143,17 +56,17 @@ public class Paper implements Serializable{
 //		}
 		
 		Element sourceNode=root.addElement("source");
-		sourceNode.addText(this.source);
+		sourceNode.addText(this.getSource());
 		
 		Element linkNode=root.addElement("link");
-		linkNode.addText(this.link);
+		linkNode.addText(this.getLink());
 		
 		Element doiNode=root.addElement("doi");
-		doiNode.addText(this.doi);
+		doiNode.addText(this.getDoi());
 //		doiNode.addAttribute("link", this.doiLink);
 		
 		Element absNode=root.addElement("abstract");
-		absNode.addText(this.abstractContent);
+		absNode.addText(this.getAbstract());
 		
 		return root;
 	}
@@ -167,7 +80,7 @@ public class Paper implements Serializable{
 		result.setSource(element.elementText("source").trim());
 		result.setPages(element.elementText("page").trim());
 		Element authorsNode=element.element("authors");
-		Vector<Author> authors=new Vector<Author>();
+		Set<Author> authors=new HashSet<Author>();
 		for (Object authorNode : authorsNode.elements()) {
 			Author author=new Author();
 			author.setLink(((Element)authorNode).attributeValue("link"));
@@ -181,7 +94,7 @@ public class Paper implements Serializable{
 		conf.setName(element.elementText("conference").trim());
 		
 		result.setConference(conf);
-		result.setAbstractContent(element.elementText("abstract").trim());
+		result.setAbstract(element.elementText("abstract").trim());
 		return result;
 	}
 }

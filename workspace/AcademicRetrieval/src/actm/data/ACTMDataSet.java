@@ -51,7 +51,7 @@ public class ACTMDataSet implements Serializable {
 			author.setIndex(aaa.getIndex());
 		}
 		ACTMDocument document=new ACTMDocument(paper,docIndex++);
-		Vector<String> tokens=StringUtils.splitStringToWords(paper.getAbstractContent()+" "+paper.getTitle());
+		Vector<String> tokens=StringUtils.splitStringToWords(paper.getAbstract()+" "+paper.getTitle());
 		
 		for (String string : tokens) {
 			Word word =globalData.GetWordWithInsert(string);
@@ -73,7 +73,7 @@ public class ACTMDataSet implements Serializable {
 			author.setIndex(aaa.getIndex());
 		}
 		ACTMDocument document=new ACTMDocument(paper,docIndex++);
-		Vector<String> tokens=StringUtils.splitStringToNgrams(paper.getAbstractContent()+" "+paper.getTitle(),ngram);
+		Vector<String> tokens=StringUtils.splitStringToNgrams(paper.getAbstract()+" "+paper.getTitle(),ngram);
 		
 		for (String string : tokens) {
 			Word word =globalData.GetWordWithInsert(string);
