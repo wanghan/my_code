@@ -1,11 +1,4 @@
 package actm.data;
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import actm.data.base.BaseConference;
 
 /**

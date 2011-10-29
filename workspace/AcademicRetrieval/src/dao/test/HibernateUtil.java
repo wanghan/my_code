@@ -3,10 +3,6 @@ package dao.test;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import actm.data.Author;
-import actm.data.Conference;
-import actm.data.Paper;
-
 
 public class HibernateUtil {
         private static final SessionFactory sessionFactory;

@@ -1,10 +1,7 @@
 package actm.data;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
-
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
 

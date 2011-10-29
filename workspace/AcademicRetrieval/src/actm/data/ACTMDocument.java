@@ -4,7 +4,6 @@
 package actm.data;
 
 import java.io.Serializable;
-import java.util.Set;
 import java.util.Vector;
 
 import tm.generalmodel.Word;

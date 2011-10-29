@@ -8,12 +8,6 @@ import java.sql.SQLException;
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
-import utils.SerializeUtils;
-import cache.RAMDictionary;
-
-import dao.test.City;
 import dao.test.CityDAO;
 import dao.test.HibernateUtil;
 
@@ -23,7 +17,6 @@ import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
 import actm.data.Author;
 import actm.data.Conference;
-import actm.data.Paper;
 
 public class Test {
 

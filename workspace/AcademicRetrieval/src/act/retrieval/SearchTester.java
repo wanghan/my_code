@@ -1,20 +1,13 @@
 package act.retrieval;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import org.apache.lucene.index.CorruptIndexException;
 
 import rmi.AssociateResult;
 
 import utils.SerializeUtils;
-import cache.RAMDictionary;
-
 import act.model.associate.TopicAssociationModel;
 import actm.data.Paper;
-import db.DBOperations;
-import db.MysqlConnection;
 
 public class SearchTester {
 

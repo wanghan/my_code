@@ -4,8 +4,6 @@
 package act.model.associate;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
 import actm.data.Topic;
 
 /**
