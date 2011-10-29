@@ -3,9 +3,6 @@
  */
 package actm.data;
 
-import java.io.Serializable;
-import java.util.Set;
-
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
 
@@ -34,19 +31,16 @@ public class Author extends BaseAuthor{
 		// TODO Auto-generated constructor stub
 	
 	}
-//
-//	public String getAcmIndex() {
-//		if(acmIndex==null){
-//			int index1=link.indexOf("id=");
-//			int index2=link.indexOf("&");
-//			acmIndex=link.substring(index1+3,index2);
-//			return acmIndex;
-//		}
-//		else{
-//			return acmIndex;
-//		}
-//	}
-//	
+
+	public String ParseAcmIndex() {
+		
+		int index1=getLink().indexOf("id=");
+		int index2=getLink().indexOf("&");
+		String result=getLink().substring(index1+3,index2);
+		return result;
+		
+	}
+	
 
 	@Override
 	public String toString() {

@@ -120,6 +120,12 @@ public class RAMDictionary implements Serializable{
 		}
 		return null;
 	}
+	public Author getAuthorByACMIndex(String id){
+		if(acmIndexAuthorMap.containsKey(id)){
+			return acmIndexAuthorMap.get(id);
+		}
+		return null;
+	}
 	public Word getWordByString(String s){
 		
 		if(stringWordMap.containsKey(s.toLowerCase())){

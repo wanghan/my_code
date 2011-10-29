@@ -10,6 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import utils.SerializeUtils;
+import cache.RAMDictionary;
+
 import dao.test.City;
 import dao.test.CityDAO;
 import dao.test.HibernateUtil;
@@ -18,6 +21,7 @@ import act.corpus.ACMCorpusLoader;
 import actm.data.ACTMDataSet;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
+import actm.data.Author;
 import actm.data.Conference;
 import actm.data.Paper;
 
@@ -55,15 +59,15 @@ public class Test {
 	}
 
 	public static void testInsertPapers() throws DocumentException,
-			IOException, SQLException {
+			IOException, Exception {
 		Connection conn = MysqlConnection.getConnection();
 		DBOperations oper = new DBOperations(conn);
-		ACTMGlobalData globalData = new ACTMGlobalData();
+		
+		ACTMGlobalData globalData=ACTMGlobalData.deserialize("act model ngram slide training\\1305783564191.glo");
 		ACTMDataSet data = new ACMCorpusLoader().loadTrainData_Small(
 				globalData, null);
 		ACTMDataSet testData = new ACMCorpusLoader().loadTestData_Small(
 				globalData, null);
-		globalData.serialize("./" + System.currentTimeMillis() + ".glo");
 		int i = 0;
 		// for (ACTMDocument paper : data.documentSet) {
 		// i++;
@@ -84,12 +88,12 @@ public class Test {
 		Long cityId = null;
 		try {
 			transaction = session.beginTransaction();
-			ACTMGlobalData globalData = new ACTMGlobalData();
+	//		RAMDictionary ram=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
+			ACTMGlobalData globalData1=new ACTMGlobalData();
 			ACTMDataSet data = new ACMCorpusLoader().loadTrainData_Small(
-					globalData, null);
+					globalData1, null);
 			ACTMDataSet testData = new ACMCorpusLoader().loadTestData_Small(
-					globalData, null);
-			globalData.serialize("./" + System.currentTimeMillis() + ".glo");
+					globalData1, null);
 			int i = 0;
 			// for (ACTMDocument paper : data.documentSet) {
 			// i++;
@@ -99,12 +103,22 @@ public class Test {
 			// }
 			// }
 			int k=0;
-			for (ACTMDocument paper : testData.documentSet) {
-				if(k++>50)
-					break;
-	
+			int authorIndex=0;
+			for (ACTMDocument paper : data.documentSet) {
+				paper.getPaper().setIndex(paper.getIndex());
 				session.save(paper.getPaper().getConference());
-				
+				for (Author author : paper.getPaper().getAuthors()) {
+					if(author.getAcmIndex()==null){
+						String acmIndex=author.ParseAcmIndex();
+						author.setAcmIndex(acmIndex);
+					}
+					if(author.getIndex()==0){
+						author.setIndex(++authorIndex);
+					}
+					
+					session.save(author);
+				}
+				session.save(paper.getPaper());
 			}
 			transaction.commit();
 		} catch (Exception e) {
