@@ -51,6 +51,7 @@ public class ACTMDataSet implements Serializable {
 			author.setIndex(aaa.getIndex());
 		}
 		ACTMDocument document=new ACTMDocument(paper,docIndex++);
+		document.getPaper().setIndex(document.getIndex());
 		Vector<String> tokens=StringUtils.splitStringToWords(paper.getAbstract()+" "+paper.getTitle());
 		
 		for (String string : tokens) {

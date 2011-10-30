@@ -30,6 +30,10 @@ public class AuthorSet implements Serializable{
 	}
 	
 	public Author InsertAuthor(Author author){
+		if(author.getAcmIndex()==null){
+			String acmIndex=author.ParseAcmIndex();
+			author.setAcmIndex(acmIndex);
+		}
 		if(acmIndexAuthorMap.containsKey(author.getAcmIndex())){
 			return acmIndexAuthorMap.get(author.getAcmIndex());
 		}

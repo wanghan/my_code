@@ -45,18 +45,17 @@ public class ACTInference {
 			}
 			
 			ACTMGlobalData globalData=new ACTMGlobalData();
-			ACTMDataSet data=new ACMCorpusLoader().loadTrainData_Small(globalData,ngrams);
+			ACTMDataSet data=new ACMCorpusLoader().loadAllData_Small(globalData,ngrams);
 
 			
 			ACTModel model=new ACTModel(data,globalData.getWordCount(),globalData.getAuthorCount(),globalData.getGlobalConferenceCount(),100);
-			ACTMDataSet testData=new ACMCorpusLoader().loadTestData_Small(globalData,ngrams);
 
 			
 			model.InitNewModel();
 			
 			ACTInference infer=new ACTInference(data,model);
 			globalData.serialize(infer.modelSavedDir+System.currentTimeMillis()+".glo");
-			infer.inference(ngrams,  testData, globalData);
+			infer.inference(ngrams,  null, globalData);
 			
 			infer.Model.SaveFinalModel(infer.modelSavedDir);
 			
@@ -76,7 +75,7 @@ public class ACTInference {
 //	private int[] order;
 	
 
-	public int N_ITERS=40; //number of Gibbs sampling iteration
+	public int N_ITERS=10; //number of Gibbs sampling iteration
 	public int SAVE_ITER=20000; 
 
 	public String modelSavedDir="ACTModels/{0}_I{1}_T{2}/";
@@ -204,7 +203,7 @@ public class ACTInference {
 							totalProb+=probs;
 							
 							authorSum[curA.getIndex()]+=probs;
-							topicSum[curA.getIndex()]+=probs;
+							topicSum[k]+=probs;
 						}
 					}
 					 
@@ -216,7 +215,7 @@ public class ACTInference {
 					
 					double max=0;
 					Iterator<Author> ita1=curDoc.getAuthors().iterator();
-					while(ita.hasNext()){
+					while(ita1.hasNext()){
 						Author curA=ita1.next();
 						max+=authorSum[curA.getIndex()];
 						if(max>=r){

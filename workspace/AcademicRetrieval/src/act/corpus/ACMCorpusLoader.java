@@ -42,6 +42,7 @@ public class ACMCorpusLoader {
 		}
 	}
 
+
 	public ACTMDataSet loadTrainData(ACTMGlobalData data) throws DocumentException, FileNotFoundException{
 		
 		ACTMDataSet dataset=new ACTMDataSet();
@@ -73,6 +74,85 @@ public class ACMCorpusLoader {
 		return dataset;
 	}
 	
+	public ACTMDataSet loadAllData_Small(ACTMGlobalData data,HashSet<String> ngrams) throws DocumentException, FileNotFoundException{
+		int randomDIO=0;
+		
+		HashSet<String> dios=new HashSet<String>();
+		
+		ACTMDataSet dataset=new ACTMDataSet();
+		
+		Scanner scanner=new Scanner(new File("ACMDataList_small1.txt"));
+		int i=0;
+		while(scanner.hasNext()){
+			String line=scanner.nextLine();
+			StringTokenizer st=new StringTokenizer(line," ");
+			String firstToken=st.nextToken();
+
+			int year=Integer.parseInt(firstToken);
+			int month=Integer.parseInt(st.nextToken());
+			String confName=st.nextToken().trim();
+			
+			SAXReader reader=new SAXReader();
+			String metadataPath="training_small1/"+confName+".xml";
+	//		System.out.println(confName);
+			Document xmldoc=reader.read(new File(metadataPath));
+			Element root1=xmldoc.getRootElement();
+			if(ngrams==null){
+				for (Object elem : root1.elements()) {
+					Paper ppp=Paper.xmlToInstance((Element)elem);
+					if(ppp.getDoi()==null||ppp.getDoi().equals("")){
+						ppp.setDoi(System.currentTimeMillis()+String.valueOf(randomDIO++));
+					}
+					dataset.insertPaper(ppp,data);
+					i+=ppp.getAuthors().size();
+				}
+			}
+			else{
+				for (Object elem : root1.elements()) {
+					Paper ppp=Paper.xmlToInstance((Element)elem);
+					if(ppp.getDoi()==null||ppp.getDoi().equals("")){
+						ppp.setDoi(System.currentTimeMillis()+String.valueOf(randomDIO++));
+					}
+					dataset.insertPaperWithNGrams(ppp,data,ngrams);
+					i+=ppp.getAuthors().size();
+				}
+			}
+		}
+		scanner.close();
+		scanner=new Scanner(new File("ACMDataList_small1.txt"));
+		i=0;
+		while(scanner.hasNext()){
+			String line=scanner.nextLine();
+			StringTokenizer st=new StringTokenizer(line," ");
+			String firstToken=st.nextToken();
+			int year=Integer.parseInt(firstToken);
+			int month=Integer.parseInt(st.nextToken());
+			String confName=st.nextToken().trim();
+			
+			SAXReader reader=new SAXReader();
+			String metadataPath="testing_small1/"+confName+".xml";
+	//		System.out.println(confName);
+			Document xmldoc=reader.read(new File(metadataPath));
+			Element root1=xmldoc.getRootElement();
+			if(ngrams==null){
+				for (Object elem : root1.elements()) {
+					Paper ppp=Paper.xmlToInstance((Element)elem);
+					dataset.insertPaper(ppp,data);
+					i+=ppp.getAuthors().size();
+				}
+			}
+			else{
+				for (Object elem : root1.elements()) {
+					Paper ppp=Paper.xmlToInstance((Element)elem);
+					dataset.insertPaperWithNGrams(ppp,data,ngrams);
+					i+=ppp.getAuthors().size();
+				}
+			}
+		}
+		scanner.close();
+		return dataset;
+		
+	}
 	
 	public ACTMDataSet loadTrainData_Small(ACTMGlobalData data,HashSet<String> ngrams) throws DocumentException, FileNotFoundException{
 		
