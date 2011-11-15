@@ -30,7 +30,7 @@ public abstract class BaseAuthor  implements Serializable {
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseAuthor (java.lang.Long id) {
+	public BaseAuthor (java.lang.Integer id) {
 		this.setId(id);
 		initialize();
 	}
@@ -39,7 +39,7 @@ public abstract class BaseAuthor  implements Serializable {
 	 * Constructor for required fields
 	 */
 	public BaseAuthor (
-		java.lang.Long id,
+		java.lang.Integer id,
 		java.lang.String name,
 		java.lang.String link,
 		java.lang.Integer index) {
@@ -58,7 +58,7 @@ public abstract class BaseAuthor  implements Serializable {
 	private int hashCode = Integer.MIN_VALUE;
 
 	// primary key
-	private java.lang.Long id;
+	private java.lang.Integer id;
 
 	// fields
 	private java.lang.String name;
@@ -77,7 +77,7 @@ public abstract class BaseAuthor  implements Serializable {
      *  generator-class="native"
      *  column="id"
      */
-	public java.lang.Long getId () {
+	public java.lang.Integer getId () {
 		return id;
 	}
 
@@ -85,7 +85,7 @@ public abstract class BaseAuthor  implements Serializable {
 	 * Set the unique identifier of this class
 	 * @param id the new ID
 	 */
-	public void setId (java.lang.Long id) {
+	public void setId (java.lang.Integer id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="dao.hibernate">
+	<class
+		name="DbAuthor"
+		table="db_author"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="Id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="Name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="Link"
+			column="link"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="AcmIndex"
+			column="acm_index"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="TmIndex"
+			column="tm_index"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="Position"
+			column="position"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Affiliation"
+			column="affiliation"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Address"
+			column="address"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Homepage"
+			column="homepage"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Interest"
+			column="interest"
+			type="string"
+			not-null="false"
+		/>
+	
+		<set
+			name="DbPapers"
+			table="db_paper_authors"
+			cascade="all"
+		>
+			<key column="author_id"/>
+			<many-to-many column="paper_id" class="DbPaper"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

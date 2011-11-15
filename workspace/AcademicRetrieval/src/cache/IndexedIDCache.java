@@ -16,11 +16,11 @@ public class IndexedIDCache implements Serializable{
 	 */
 	private static final long serialVersionUID = 5148077516522375935L;
 	HashSet<Integer> paperIDSet;
-	HashSet<Long> authorIDSet;
+	HashSet<Integer> authorIDSet;
 	HashSet<Integer> conferenceIDSet;
 	public IndexedIDCache() {
 		// TODO Auto-generated constructor stub
-		this.authorIDSet=new HashSet<Long>();
+		this.authorIDSet=new HashSet<Integer>();
 		this.conferenceIDSet=new HashSet<Integer>();
 		this.paperIDSet=new HashSet<Integer>();
 	}
@@ -30,7 +30,7 @@ public class IndexedIDCache implements Serializable{
 	public boolean hasPaperID(int id){
 		return paperIDSet.contains(id);
 	}
-	public boolean hasAuthorID(long id){
+	public boolean hasAuthorID(int id){
 		return authorIDSet.contains(id);
 	}
 	public boolean hasConferenceID(int id){
@@ -40,7 +40,7 @@ public class IndexedIDCache implements Serializable{
 	public void insertPaperID(int id){
 		paperIDSet.add(id);
 	}
-	public void insertAuthorID(Long id){
+	public void insertAuthorID(int id){
 		authorIDSet.add(id);
 	}
 	public void insertConferenceID(int id){

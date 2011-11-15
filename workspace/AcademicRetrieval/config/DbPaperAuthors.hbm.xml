@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="dao.hibernate">
+	<class
+		name="DbPaperAuthors"
+		table="db_paper_authors"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<composite-id>
+			<key-many-to-one
+				name="Author"
+				class="DbAuthor"
+				column="author_id"
+			/>
+			<key-many-to-one
+				name="Paper"
+				class="DbPaper"
+				column="paper_id"
+			/>
+		</composite-id>
+
+
+
+	</class>	
+</hibernate-mapping>

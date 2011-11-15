@@ -60,14 +60,14 @@ public class DBOperations {
 		
 		//insert authors
 		for (Author aa : paper.getAuthors()) {
-			long authorid=insertAuthor(aa);
+			int authorid=insertAuthor(aa);
 			insertPaperAuthor(paper.getId(), authorid);
 			aa.setId(authorid);
 		}
 		
 	}
 	
-	public long insertPaperAuthor(int paperid, long authorid) throws SQLException{
+	public int insertPaperAuthor(int paperid, int authorid) throws SQLException{
 		StringBuffer sqlCom=new StringBuffer("INSERT INTO paperauthors (paperid,authorid) VALUES(");
 		
 		sqlCom.append("'"+paperid+"' ,");
@@ -80,7 +80,7 @@ public class DBOperations {
 		ResultSet rs=st.getGeneratedKeys();
 		rs.next();
 		
-		return rs.getLong(1);
+		return rs.getInt(1);
 	}
 	
 	public int insertConference(Conference conf) throws SQLException{
@@ -157,7 +157,7 @@ public class DBOperations {
 		}
 	}
 	
-	public long insertAuthor(Author author) throws SQLException{
+	public int insertAuthor(Author author) throws SQLException{
 		
 		Author queryA=getAuthorByAcmIndex(author.getAcmIndex());
 		if(queryA!=null){
@@ -179,7 +179,7 @@ public class DBOperations {
 		st.executeUpdate();
 		ResultSet rs=st.getGeneratedKeys();
 		rs.next();
-		author.setId(rs.getLong(1));
+		author.setId(rs.getInt(1));
 		return author.getId();
 	}
 	
@@ -199,7 +199,7 @@ public class DBOperations {
 			a.setLink(result.getString("acm_link"));
 			a.setIndex(result.getInt("tm_index"));
 			a.setAcmIndex(result.getString("acm_index"));
-			a.setId(result.getLong("id"));
+			a.setId(result.getInt("id"));
 			return a;
 		}
 	}
@@ -220,7 +220,7 @@ public class DBOperations {
 			a.setLink(result.getString("acm_link"));
 			a.setIndex(result.getInt("tm_index"));
 			a.setAcmIndex(result.getString("acm_index"));
-			a.setId(result.getLong("id"));
+			a.setId(result.getInt("id"));
 			return a;
 		}
 	}
@@ -241,7 +241,7 @@ public class DBOperations {
 			a.setLink(result.getString("acm_link"));
 			a.setIndex(result.getInt("tm_index"));
 			a.setAcmIndex(result.getString("acm_index"));
-			a.setId(result.getLong("id"));
+			a.setId(result.getInt("id"));
 			return a;
 		}
 	}

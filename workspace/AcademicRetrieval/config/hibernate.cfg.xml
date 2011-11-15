@@ -14,9 +14,9 @@
                 <property name="show_sql">true</property>
                 <property name="hbm2ddl.auto">update</property>
                 
-                <mapping resource="Author.hbm.xml" />
-                <mapping resource="Paper.hbm.xml" />
-                <mapping resource="Conference.hbm.xml" /> 
-                <mapping resource="PaperAuthors.hbm.xml" /> 
+                <mapping resource="DbAuthor.hbm.xml" />
+                <mapping resource="DbPaper.hbm.xml" />
+                <mapping resource="DbConference.hbm.xml" /> 
+                <mapping resource="DbPaperAuthors.hbm.xml" /> 
         </session-factory>
 </hibernate-configuration>
