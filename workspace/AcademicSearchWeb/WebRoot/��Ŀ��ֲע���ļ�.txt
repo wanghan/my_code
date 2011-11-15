@@ -1,0 +1,15 @@
+AUDRweb
+-------------------------------------------------	
+header.jsp			
+*_rs.js				
+
+=================================================
+WebRoot	
+-------------------------------------------------
+AudioDetailServlet
+ClusterServlet
+SearchImageInfoServlet
+textItemShowServlet
+showimageMinipage.jsp
+videoDetail.jsp
+videoList.jsp

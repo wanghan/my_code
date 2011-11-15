@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+body {
+	/*background-color: #ffffff;*/
+	background-image: url(../img/beijing4.gif);
+	background-repeat: repeat;
+}
+
+body,td,th,p {
+font-size: 14px;
+}
+
+.bodyDiv{
+	width: 890px;
+	background-color:#ffffff;
+}
+.bodyTab{
+	width: 890px;
+}
+
+.bgc{
+	background-color: #99CCFF;
+}
+.bgd{
+	background-color: #ffffff;
+}
+
+.bgm{
+	background-image: url(../img/beijing3.jpg);
+	background-repeat: repeat;
+}
