@@ -31,7 +31,7 @@ public class Test {
 		
 		try {
 		
-			testPPXforACTmodel();
+			testLoadACTModel();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,13 +135,15 @@ public class Test {
 	private static void testLoadACTModel() {
 		// TODO Auto-generated method stub
 		try {
-			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1305479706644_I50_T100/Slide_S{3}/1305516558577.model");
-			ACTMGlobalData globalData=ACTMGlobalData.deserialize("./ACTModels/1305479706644_I50_T100/Slide_S{3}/1305516558577.model");
-			ACTMDataSet data=new ACMCorpusLoader().loadTrainData_Small(globalData,null);
+			
+			ACTMGlobalData globalData=ACTMGlobalData.deserialize("./ACTModels/1319975613762_I100_T100/1319975613763.glo");
+			
+			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
+			
 
 			ACTVisualizer visualizer=new ACTVisualizer(model,globalData);
 			
-			String showFile="ACTModels/1304763199171_I500_T100/"+System.currentTimeMillis()+".show";
+			String showFile="ACTModels/"+System.currentTimeMillis()+".show";
 			File fileout =new File(showFile);
 			FileWriter writer=new FileWriter(fileout);
 			

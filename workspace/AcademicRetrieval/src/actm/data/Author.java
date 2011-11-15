@@ -14,11 +14,6 @@ import actm.data.base.BaseAuthor;
  */
 public class Author extends BaseAuthor{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3909655305564996285L;
-	
 	public double[] topicWeight;
 	
 	public Author(String name, String link) {

@@ -12,6 +12,7 @@ import dao.test.CityDAO;
 import dao.test.HibernateUtil;
 
 import act.corpus.ACMCorpusLoader;
+import act.model.ACTModel;
 import actm.data.ACTMDataSet;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
@@ -82,11 +83,8 @@ public class Test {
 		try {
 			transaction = session.beginTransaction();
 	//		RAMDictionary ram=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
-			ACTMGlobalData globalData1=new ACTMGlobalData();
-			ACTMDataSet data = new ACMCorpusLoader().loadTrainData_Small(
-					globalData1, null);
-			ACTMDataSet testData = new ACMCorpusLoader().loadTestData_Small(
-					globalData1, null);
+			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
+			ACTMGlobalData globalData=ACTMGlobalData.deserialize("./ACTModels/1319975613762_I100_T100/1319975613763.glo");
 			int i = 0;
 			// for (ACTMDocument paper : data.documentSet) {
 			// i++;
@@ -97,18 +95,16 @@ public class Test {
 			// }
 			int k=0;
 			int authorIndex=0;
-			for (ACTMDocument paper : data.documentSet) {
+			for (ACTMDocument paper : model.dataSet.documentSet) {
 				paper.getPaper().setIndex(paper.getIndex());
 				session.save(paper.getPaper().getConference());
 				for (Author author : paper.getPaper().getAuthors()) {
+					
 					if(author.getAcmIndex()==null){
 						String acmIndex=author.ParseAcmIndex();
 						author.setAcmIndex(acmIndex);
 					}
-					if(author.getIndex()==0){
-						author.setIndex(++authorIndex);
-					}
-					
+					author.setId(Long.parseLong(author.getAcmIndex()));
 					session.save(author);
 				}
 				session.save(paper.getPaper());

@@ -11,10 +11,10 @@
 		<meta attribute="sync-DAO">false</meta>
 		<id
 			name="Id"
-			type="integer"
+			type="java.lang.Long"
 			column="id"
 		>
-			<generator class="native"/>
+			<generator class="assigned"/>
 		</id>
 
 		<property
@@ -39,21 +39,43 @@
 			length="255"
 		/>
 		<property
-			name="Index"
+			name="TmIndex"
 			column="tm_index"
 			type="integer"
 			not-null="true"
 			length="10"
 		/>
-		<set name="Papers"
-             table="paper_authors"
-             cascade="all">
-            <!--column="personid"指定连接表中关联当前实体类的列名-->
-            <key column="author_id" not-null="true"/>
-            <!--column="addressid"是连接表中关联本实体的外键-->
-            <many-to-many column="paper_id"
-                          class="actm.data.Paper"/>
-        </set>
+		<property
+			name="Position"
+			column="position"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Affiliation"
+			column="affiliation"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Address"
+			column="address"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Homepage"
+			column="homepage"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="Interest"
+			column="interest"
+			type="string"
+			not-null="false"
+		/>
+
 
 	</class>	
 </hibernate-mapping>
