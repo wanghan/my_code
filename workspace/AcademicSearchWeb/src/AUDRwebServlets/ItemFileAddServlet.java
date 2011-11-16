@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import AudrConsole.UserDeleteImageTransporter;
-import AudrConsole.UserInsertTextTransporter;
-import AudrConsole.UserInsertTransporter;
 import Common.FileType;
 
 public class ItemFileAddServlet extends HttpServlet{
@@ -181,22 +178,13 @@ public class ItemFileAddServlet extends HttpServlet{
 				else
 				{
 					//正确，可以添加
-					UserInsertTransporter ut = new UserInsertTransporter();
-					//生成bf
-					String[] bf = {date+ ";" +addvals[4]+ ";" +audr_file.getAbsolutePath()+ ";" +audr_file.getAbsolutePath()+ ";" +sizek};
-					File[] urls = {audr_file};
-					File sf = semantics_file;
-					String msg = ut.sendInsertInfo(urls, bf, sf, cfile_subtype);
-					//sb.append("添加成功");
-					sb.append(msg);
-
-					System.out.println("音频添加："+msg);
+					
 				}
 			}
 			else if(n==1)	//文本
 			{
 				//正确，可以添加
-				UserInsertTextTransporter ut = new UserInsertTextTransporter();
+	
 				
 				//生成bf
 				String[] bf = {date+ ";" +addvals[4]+ ";" +audr_file.getAbsolutePath()+ ";" +audr_file.getAbsolutePath()+ ";" +sizek};

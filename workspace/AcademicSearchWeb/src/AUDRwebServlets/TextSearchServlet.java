@@ -16,14 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sys.TextQueryResult;
-import AUDRcopyCS.getAddSFBF;
 import AUDRwebJavaBeans.TextBasicFeature;
 import AUDRwebJavaBeans.TextItem;
 import AUDRwebJavaBeans.TextModel;
 import AUDRwebJavaBeans.TextSemanticFeature;
 import AUDRwebJavaBeans.SearchType;
 import Common.SYSPROPERTIES;
-import AudrConsole.UserQueryTextTransporter;
 
 public class TextSearchServlet extends HttpServlet {
 
@@ -115,8 +113,6 @@ public class TextSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		SearchType tt = new SearchType();
-		UserQueryTextTransporter uqTransporter = new UserQueryTextTransporter();
-
 		// 设置显示编码
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -275,8 +271,7 @@ public class TextSearchServlet extends HttpServlet {
 		try {
 			System.out.println("results:" + searchText + "、bf、sf、" + searchType
 					+ "、" + userPath);
-			results = uqTransporter.querybyKeywords(searchText, bf, sf,
-					searchType, userPath);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("调用总控查询错误，检查服务是否都已经开启");
@@ -368,16 +363,7 @@ public class TextSearchServlet extends HttpServlet {
 
 			System.out.println(start / 10 + 1 + "keys:" + keys);
 
-			getAddSFBF S = new getAddSFBF(tmMap, tbfMap, tsfMap);
-			// 把结果放到 LIST TEXTBF TEXTSF
-			System.out.println("=====================================");
-			System.out.println("keys:" + keys);
-			System.out.println("userPath:" + userPath);
-			for (TextQueryResult t : trs) {
-				System.out.println(t + "\t" + t.getId());
-			}
-			System.out.println("=====================================");
-			S.AddSFBF(0, keys.toArray(new String[0]), trs, this.userPath);
+		
 			// 以下变量都是通过results.id 作为键值的
 			// results、list、textBF、textSF
 
