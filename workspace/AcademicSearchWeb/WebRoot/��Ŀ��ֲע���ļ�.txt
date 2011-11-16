@@ -14,4 +14,4 @@ showimageMinipage.jsp
 videoDetail.jsp
 videoList.jsp
 
-http://localhost:8080/AUDRweb/SearchText/index.jsp
+http://localhost:8080/AcademicSearchWeb/textSearch.jsp

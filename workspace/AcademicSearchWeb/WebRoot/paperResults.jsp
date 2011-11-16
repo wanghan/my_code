@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,AUDRwebJavaBeans.*,sys.*" contentType="text/html; charset=utf-8"
+<%@ page language="java" import="java.util.*,hibernate.*,sys.*" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,7 +8,8 @@
 
 <link href="<%=path %>/css/bodyCss.css" rel="stylesheet" type="text/css"/>	
 <link href="<%=path %>/css/hyperlink.css" rel="stylesheet" type="text/css"/>
-<title>文本检索 文本检索结果列表</title>
+<link href="<%=path %>/css/inner.css" rel="stylesheet" type="text/css"/>
+<title>Paper Search Result</title>
 </head>
 <script type="text/javascript">
 function init(id)
@@ -38,18 +39,17 @@ function sub(str){
 </script>
 <jsp:useBean id="tt" class="AUDRwebJavaBeans.SearchType"></jsp:useBean>
 <% 
-	//当前所有文件类型[中、英]
 	String[] tfe = tt.search_type;
 	request.setAttribute("tfe",tfe);
 
-	ArrayList<TextItem> list = (ArrayList<TextItem>)request.getSession().getAttribute("list");
+	ArrayList<DbPaper> list = (ArrayList<DbPaper>)request.getSession().getAttribute("list");
 	request.setAttribute("list",list);
 %>
 <body onload="init('${tfe[0] }')">
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<center>
 
-	<form action="<%=path %>/TextSearch" method="post" name="" onsubmit="return sub('searchText')">
+	<form action="<%=path %>/PaperSearch" method="post" name="" onsubmit="return sub('searchText')">
 	<table>
 		<tr>
 			<td>
@@ -79,12 +79,12 @@ function sub(str){
 <table width="100%">
 	<tr>
 		<td width="" valign="top">
-			搜索时间:<font color="red">${(e-s)/1000.0 }</font>s
+			Search Time:<font color="red">${(e-s)/1000.0 }</font>s
 			<hr color="#6699CC"/>
 			<!-- 搜索结果显示 -->
 			<c:choose>
 				<c:when test="${fn:length(list)==0}">
-					<font size="7" color="red">查询结果为空！！！</font>
+					<font size="7" color="red">Result is Null!</font>
 				</c:when>
 				<c:otherwise>
 					<table width="100%">
@@ -92,7 +92,7 @@ function sub(str){
 					if(list!=null)
 					for(int i=0;i<list.size();i++)
 					{
-						TextItem ttm = new TextItem();
+						DbPaper ttm = new DbPaper();
 						ttm = list.get(i);
 						
 						if(i%2==0){
@@ -102,29 +102,29 @@ function sub(str){
 					<tr bgcolor="#eeeeee">
 					<%} %>
 						<td>
+						<div id="publist">
 							<strong>
-								<a href="<%=path %>/textItemShow?fid=<%=ttm.getTqr().getId() %>">
-								<%=ttm.getTqr().getOriginalFileName() %>
+								<a class="url" href="<%=path %>/textItemShow?fid=<%=ttm.getId() %>">
+								<%=ttm.getTitle() %>
 								</a>
+
 							</strong>
-							<p>
-								<%=ttm.getTqr().getSnippet() %>
-							</p>
-							<span style="font-size: 12px;color: #55555;">
-								Owner:<%=ttm.getTbf().getAuthor()%>
-								Uplaod Time:<%=ttm.getTbf().getStrDate() %>
-								Size:<%=ttm.getTbf().getFileSize() %>
-								<%
-								int[] nn = {2,3,5,6};
-								for(int k=0;k<nn.length;k++){
-								if(
-									(!ttm.getTsf().get(ttm.getTsf().getSingleItem(nn[k])).equals(""))
-									&&
-									(!ttm.getTsf().get(ttm.getTsf().getSingleItem(nn[k])).equals("nothing"))){%>
-								<%=ttm.getTsf().getSingleItem(nn[k]) %>:<%=ttm.getTsf().get(ttm.getTsf().getSingleItem(nn[k])) %>
-								<%}} %>
-								
-							</span>
+							<br/>
+							<br/>
+							<li><span>Authors:</span>    
+							<%
+							DbAuthor []authors=(DbAuthor [])ttm.getDbAuthors().toArray(new DbAuthor[0]);
+							for(int j=0;j<authors.length-1;j++)
+							{
+							%>
+								<a href="<%=path %>/textItemShow?fid=<%=authors[j].getName()%>"><%=authors[j].getName()%></a>, 
+							<%}%>
+							<a href="<%=path %>/textItemShow?fid=<%=authors[authors.length-1].getName()%>"><%=authors[authors.length-1].getName()%></a> 
+							<br/></li>
+							<li><span>Proceedings:</span>   <%="\t\t"+ttm.getDbConference().getName() %><br/></li>
+							<li><span>Published year:</span>    <%="\t\t"+ttm.getDbConference().getDate()%></li>
+
+						</div>
 						</td>
 					</tr>
 					<%} %>
@@ -147,7 +147,7 @@ function sub(str){
 											<font color="red">${i }</font>
 										</c:when>
 										<c:otherwise>
-											<a href="<%=path %>/TextSearch?id=${i }">${i }</a>
+											<a href="<%=path %>/PaperSearch?id=${i }">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -156,8 +156,8 @@ function sub(str){
 										<font color="#888888">下一页  最后一页</font>
 									</c:when>
 									<c:otherwise>
-										<a href="<%=path %>/TextSearch?id=${nowpage+1 }">下一页</a>
-										<a href="<%=path %>/TextSearch?id=${sessionScope.totPage }">最后一页</a>
+										<a href="<%=path %>/PaperSearch?id=${nowpage+1 }">下一页</a>
+										<a href="<%=path %>/PaperSearch?id=${sessionScope.totPage }">最后一页</a>
 									</c:otherwise>
 								</c:choose>
 							</td>

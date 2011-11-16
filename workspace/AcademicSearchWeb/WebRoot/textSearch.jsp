@@ -28,7 +28,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 
 	<center>
 	
-	<form action="<%=path %>/TextSearch" method="post" name="" onsubmit="return sub('searchText')">
+	<form action="<%=path %>/PaperSearch" method="post" name="" onsubmit="return sub('searchText')">
 	<table>
 		<tr>
 			<td>
