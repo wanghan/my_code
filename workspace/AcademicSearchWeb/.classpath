@@ -12,5 +12,10 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-lang-2.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pager-taglib.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EM"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_CORE"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/audr.academic.retrieval.server.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xercesImpl.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

@@ -3,7 +3,7 @@
   type="WEB"
   name="AcademicSearchWeb"
   id="myeclipse.1268274046859"
-  context-root="/AUDRweb"
+  context-root="/AcademicSearchWeb"
   j2ee-spec="1.4"
   archive="AcademicSearchWeb.war">
   <attributes>
