@@ -38,20 +38,23 @@ public class WebpageDownloader{
 
 			httpConn = (HttpURLConnection) url.openConnection();
 			httpConn.setRequestMethod("GET");
+	
 			httpConn
 					.setRequestProperty(
 							"User-Agent",
 							"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14");
+			httpConn.connect();
 			InputStream in = httpConn.getInputStream();
 			DataInputStream input=new DataInputStream(in);
 			FileOutputStream out = new FileOutputStream(new File(destFile));
 
 			int len=-1;
+			
 			while ((len=input.read(buffer)) != -1) {
 				out.write(buffer, 0, len);
 				out.flush();
 			}
-
+			httpConn.disconnect();
 			out.close();
 			input.close();
 

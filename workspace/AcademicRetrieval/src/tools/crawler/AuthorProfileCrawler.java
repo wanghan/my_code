@@ -3,6 +3,8 @@ package tools.crawler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Scanner;
 import java.util.Vector;
 
 import org.dom4j.Document;
@@ -14,14 +16,8 @@ import org.htmlparser.Parser;
 import org.htmlparser.tags.Div;
 import org.htmlparser.tags.ImageTag;
 import org.htmlparser.tags.LinkTag;
-import org.htmlparser.tags.Span;
 import org.htmlparser.tags.TableRow;
 import org.htmlparser.util.NodeList;
-
-import act.corpus.ACMCorpusLoader;
-import actm.data.ACTMDataSet;
-import actm.data.ACTMGlobalData;
-import actm.data.Author;
 
 import utils.WebpageDownloader;
 
@@ -34,20 +30,33 @@ public class AuthorProfileCrawler {
 		// TODO Auto-generated method stub
 		try {
 			int k=0;
-			ACTMGlobalData globalData=new ACTMGlobalData();
-			ACTMDataSet data=new ACMCorpusLoader().loadAllData_Small(globalData,null);
+//			ACTMGlobalData globalData=new ACTMGlobalData();
+//			ACTMDataSet data=new ACMCorpusLoader().loadAllData_Small(globalData,null);
+//			Thread.sleep(3600*1000);
+			System.out.println("run");
+			Scanner reader=new Scanner(new File("./aaa.txt"));
+			
 			AuthorProfileCrawler cc=new AuthorProfileCrawler();
 			
-			for (String id : globalData.authorSet.acmIndexAuthorMap.keySet()) {
+			while(reader.hasNext()){
 				k++;
+				String line=reader.nextLine();
+				int index=line.indexOf("\t");
+				String id=line.substring(0,index);
+				String name=line.substring(index+1);
 				String outPath=temp_path+id+".html";
 				if(new File(outPath).exists()){
-					System.out.println("Skip :"+id);
+	//				System.out.println("Skip :"+id);
 					continue;
 				}
-				cc.extract(globalData.authorSet.acmIndexAuthorMap.get(id).getName(), id);
-				System.out.print(k+ "\t");
+				cc.extract(name, id);
+				System.out.print(Calendar.getInstance().getTime()+"\t"+k+ "\t");
+				if(k%200==0){
+					Thread.sleep(1000*60*2);
+					System.out.println("run");
+				}
 			}
+			reader.close();
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -15,9 +15,12 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
+import rmi.ModelLoaderRMIClient;
+
 import utils.StringUtils;
 
 import act.corpus.ACMCorpusLoader;
+import act.model.ACTModel;
 import actm.data.ACTMDataSet;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
@@ -38,24 +41,26 @@ public class TextIndexer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		testInsertConf();
-		testInsertPapers();
-		testInsertAuthors();
+		try {
+	//		ACTMGlobalData globalData=ACTMGlobalData.deserialize("./ACTModels/1319975613762_I100_T100/1319975613763.glo");
+			
+			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
+			TextIndexer indexer= new TextIndexer(model.dataSet);
+			indexer.indexAllPapers(TextIndexer.paperIndexDir);
+			indexer.dispose();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	
 	}
 
 
 
 
-	private static void testInsertPapers() {
+	private static void testInsertPapers(ACTMDataSet data) {
 		try {
-			HashSet<String> ngrams=new HashSet<String>();
 			
-			Vector<Parse> labels=LabelingUtils.loadCandidateLabelsFromNgramRankingFile("rude.x2");
-			for (Parse parse : labels) {
-				ngrams.add(parse.toString());
-			}
-			ACTMGlobalData globalData=ACTMGlobalData.deserialize("ACTModels\\act model ngram i=50 t=100\\1305507776964.glo");
-			ACTMDataSet data=new ACMCorpusLoader().loadTrainData_Small(globalData,ngrams);
 			new TextIndexer(data).indexAllPapers(paperIndexDir);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -65,16 +70,8 @@ public class TextIndexer {
 	
 	
 	
-	private static void testInsertAuthors() {
+	private static void testInsertAuthors(ACTMDataSet data) {
 		try {
-			HashSet<String> ngrams=new HashSet<String>();
-			
-			Vector<Parse> labels=LabelingUtils.loadCandidateLabelsFromNgramRankingFile("rude.x2");
-			for (Parse parse : labels) {
-				ngrams.add(parse.toString());
-			}
-			ACTMGlobalData globalData=ACTMGlobalData.deserialize("ACTModels\\act model ngram i=50 t=100\\1305507776964.glo");
-			ACTMDataSet data=new ACMCorpusLoader().loadTrainData_Small(globalData,ngrams);
 			new TextIndexer(data).indexAllAuthors(authorIndexDir);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -95,16 +92,8 @@ public class TextIndexer {
 //	public static String confIndexDir_Online="index\\conf_Online\\";
 	
 	
-	public static void testInsertConf(){
+	public static void testInsertConf(ACTMDataSet data){
 		try {
-		HashSet<String> ngrams=new HashSet<String>();
-			
-			Vector<Parse> labels=LabelingUtils.loadCandidateLabelsFromNgramRankingFile("rude1.x2");
-			for (Parse parse : labels) {
-				ngrams.add(parse.toString());
-			}
-			ACTMGlobalData globalData=ACTMGlobalData.deserialize("ACTModels\\act model ngram i=50 t=100\\1305507776964.glo");
-			ACTMDataSet data=new ACMCorpusLoader().loadTrainData_Small(globalData,null);
 			new TextIndexer(data).indexAllConferences(confIndexDir);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -127,6 +116,8 @@ public class TextIndexer {
 	
 	public TextIndexer(ACTMDataSet data) throws IOException {
 		// TODO Auto-generated constructor stub
+		this.data=data;
+		
 		for (ACTMDocument doc : data.documentSet) {
 			
 			String docContent=doc.getContent();

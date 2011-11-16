@@ -33,13 +33,14 @@ public class RAMDictionary implements Serializable{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-//			ACTMGlobalData globalData=ACTMGlobalData.deserialize("act model ngram slide training\\1305783564191.glo");
-//			ACTModel model=ACTModel.LoadWholeModel("act model ngram slide training\\1305783341789.model");
-//			
-//			RAMDictionary ram=new RAMDictionary(model,globalData);
-//			
-//			SerializeUtils.serialize(ram, RAMDictionary.storagePath);
-//			
+			ACTMGlobalData globalData=ACTMGlobalData.deserialize("./ACTModels/1319975613762_I100_T100/1319975613763.glo");
+			
+			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
+			
+			RAMDictionary ram=new RAMDictionary(model,globalData);
+			
+			SerializeUtils.serialize(ram, RAMDictionary.storagePath);
+			
 			long cur1=System.currentTimeMillis();
 			RAMDictionary test=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
 			

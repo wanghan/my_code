@@ -61,7 +61,7 @@ public class DocumentMaker {
 
 		// make a new, empty document
 		Document doc = new Document();
-		doc.add(new Field(IndexFields.ConferenceName, conference.getGlobalName(), Field.Store.YES,
+		doc.add(new Field(IndexFields.ConferenceName, conference.getName(), Field.Store.YES,
 				Field.Index.NOT_ANALYZED));
 		doc.add(new Field(IndexFields.ConferenceIndex,String.valueOf(conference.getGlobalIndex()), Field.Store.YES,
 				Field.Index.NOT_ANALYZED));

@@ -27,7 +27,7 @@ public class TopicAssociator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			ACTModel model=ACTModel.LoadWholeModel("act model ngram slide training\\1305783341789.model");
+			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
 			TopicAssociationModel assModel=TopicAssociator.modelingAssociation(model);
 			SerializeUtils.serialize(assModel, TopicAssociationModel.storagePath);
 			
@@ -40,8 +40,8 @@ public class TopicAssociator {
 		}
 	}
 
-	public static int TopKNumber=10;
-	public static int TopKNumberForTopic=5;
+	public static int TopKNumber=20;
+	public static int TopKNumberForTopic=10;
 	
 	public static TopicAssociationModel modelingAssociation(ACTModel model){
 		
@@ -100,7 +100,7 @@ public class TopicAssociator {
 				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
 				while(ita.hasNext()){
 					Author cur=ita.next();
-					docWeight[doc.getIndex()]+=model.theta[i][cur.getIndex()];
+					docWeight[i]+=model.theta[i][cur.getIndex()];
 				}
 				docWeight[i]/=doc.getPaper().getAuthors().size();
 			}
@@ -122,7 +122,6 @@ public class TopicAssociator {
 				result.authorRelatedTopic[j][k]=authorSortResult.get(k).getKey();
 			}
 		}
-		
 		return result;
 	}
 	

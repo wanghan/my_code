@@ -19,6 +19,8 @@ public class TopicAssociationModel implements Serializable {
 
 	public static String storagePath="index\\ram\\associate.ram";
 	
+	
+	//key is tm index;
 	public Topic [] topics;
 	public int [][] paperRelatedTopic;
 	public int [][] authorRelatedTopic;

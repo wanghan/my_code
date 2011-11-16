@@ -225,7 +225,10 @@ public class TextSearcher implements Serializable {
 		cache=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
 	}
 
-	public int[] searchAuthor(String keyword){
+	/**
+	 * return array of tm indexes
+	 */
+	public Integer[] searchAuthor(String keyword){
 
 		try {
 			Vector<String> tokens=null;
@@ -247,8 +250,8 @@ public class TextSearcher implements Serializable {
 			Double scores[]=new Double[tops.scoreDocs.length];
 			for (int i = 0; i < tops.scoreDocs.length; ++i) {
 				Document doc=authorIndexSearcher.doc(tops.scoreDocs[i].doc);
-				ids[i]=Integer.parseInt(doc.get(IndexFields.DB_ID));
 				int tm_id=Integer.parseInt(doc.get(IndexFields.TM_INDEX));
+				ids[i]=tm_id;
 				double weight=tops.scoreDocs[i].score;
 				Author a=cache.getAuthorByTMIndex(tm_id);
 				
@@ -269,7 +272,7 @@ public class TextSearcher implements Serializable {
 			}
 			KeyValuePairSorting<Integer, Double> pairs=new KeyValuePairSorting<Integer, Double>(ids,scores);
 			ArrayList<KeyValuePair<Integer, Double>> sortedPairs=pairs.sort(true);
-			int[] result=new int[returnNum];
+			Integer[] result=new Integer[returnNum];
 			for(int i=0;i<returnNum;++i){
 				result[i]=sortedPairs.get(i).getKey();
 			}
@@ -340,7 +343,10 @@ public class TextSearcher implements Serializable {
 //		
 //	}
 
-	public int[] searchPaper(String keyword)
+	/**
+	 * return array of tm indexes
+	 */
+	public Integer[] searchPaper(String keyword)
 			throws CorruptIndexException, IOException {
 
 		try {
@@ -363,8 +369,9 @@ public class TextSearcher implements Serializable {
 			Double scores[]=new Double[tops.scoreDocs.length];
 			for (int i = 0; i < tops.scoreDocs.length; ++i) {
 				Document doc=paperIndexSearcher.doc(tops.scoreDocs[i].doc);
-				ids[i]=Integer.parseInt(doc.get(IndexFields.DB_ID));
 				int tm_id=Integer.parseInt(doc.get(IndexFields.TM_INDEX));
+				ids[i]=tm_id;
+				
 				double weight=tops.scoreDocs[i].score;
 				Paper d=cache.getPaperByTMIndex(tm_id);
 				
@@ -385,7 +392,7 @@ public class TextSearcher implements Serializable {
 			}
 			KeyValuePairSorting<Integer, Double> pairs=new KeyValuePairSorting<Integer, Double>(ids,scores);
 			ArrayList<KeyValuePair<Integer, Double>> sortedPairs=pairs.sort(true);
-			int[] result=new int[returnNum];
+			Integer[] result=new Integer[returnNum];
 			for(int i=0;i<returnNum;++i){
 				result[i]=sortedPairs.get(i).getKey();
 			}

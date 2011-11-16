@@ -18,9 +18,9 @@ public class SearchTester {
 		// TODO Auto-generated method stub
 		try {
 			int id=2;
-
-			TextSearcher searcher=new TextSearcher();
 			TopicAssociationModel assModel=(TopicAssociationModel)SerializeUtils.deSerialize(TopicAssociationModel.storagePath);
+			TextSearcher searcher=new TextSearcher();
+			
 			Paper p=searcher.cache.getPaperByTMIndex(id);
 			long before=System.currentTimeMillis();
 			AssociateResult[] re=new AssociateResult[5];
