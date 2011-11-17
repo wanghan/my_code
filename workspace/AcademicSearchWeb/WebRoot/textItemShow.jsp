@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>文本检索 文本详细信息</title>
+    <title>Paper Details</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -12,9 +12,10 @@
 	<meta http-equiv="description" content="This is my page">
 	<link href="<%=path %>/css/bodyCss.css" rel="stylesheet" type="text/css"/>	
 	<link href="<%=path %>/css/hyperlink.css" rel="stylesheet" type="text/css"/>
-	<script type="text/javascript" src="<%=path %>/js/textShow.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/textShow_rs.js"></script>
-
+	<link href="<%=path %>/css/inner.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=path %>/css/person_info.css" rel="stylesheet" type="text/css"/>
+	<link href="<%=path %>/css/viewpub.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="<%=path %>/js/image_utils.js"></script>
   </head>
   <style type="text/css">
     .showDeck {
@@ -41,70 +42,80 @@
 	String fileName="abc.txt";
   %>
   <body>
-  <jsp:include page="/common/header.jsp"></jsp:include>
+  <jsp:include page="/common/header_search.jsp"></jsp:include>
   	<div id="content">
 			<div id="main">
 
-				<h2 class="title">Data Mining: An Overview from a Database Perspective.</h2>
-				<div class="paper_op_links">
-					&nbsp;<a href="http://www.informatik.uni-trier.de/~ley/db/journals/tkde/tkde8.html#ChenHY96" class = "yellow-link">[DBLP_Link]</a>&nbsp;<a href="http://www.informatik.uni-trier.de/~ley/db/journals/tkde/ChenHY96.html" class = "yellow-link">[Online_Version]</a>
-<span class='text_link'>CitedBy 1672</span>
-<span>&nbsp;<a href="dev.do?m=downloadpdf&url=
-http://arnetminer.org/pdf/PDFFiles2/--d---d-1253785579187/Data Mining  An Overview from a Database Perspective1253797231235.pdf
-" class = "locallink">[PDF]
-</a></span>
-
-				</div>
+				<h2 class="title"><%=item.getTitle() %></h2>
+				
 
 				<div class="author_info">
 					<span class="name">Authors: </span>
-					<ul class="authorlist" id="imws_authors" imws:type="PersonInfo.Tiny"
-						imws_param:ids="6987,745329,265966">
-						<li>Ming-Syan Chen</li><li>Jiawei Han</li><li>Philip S. Yu</li>
+					<ul class="authorlist">
+					<table>
+						<%
+						DbAuthor [] authors=(DbAuthor [])item.getDbAuthors().toArray(new DbAuthor[0]);
+						for(int i=0;i<authors.length;++i) 
+						{	
+						%>
+						<tr>
+						<td>
+						<img src="<%=path %>/author_profile/81100002314.jpg" align="center" onload="DrawImage(this,70,70)">
+						</td>
+						<td>
+						<li><a href="<%=path %>/textItemShow?fid=<%=authors[i].getName()%>"><%=authors[i].getName() %></a></li>
+						</td>
+						</tr>
+						
+						
+						<%} %>
+					</table>
 					</ul>
 					
-					<script type="text/javascript"><!--
-google_ad_client = "ca-pub-4644025872977348";
-/* in paper */
-google_ad_slot = "8758650456";
-google_ad_width = 250;
-google_ad_height = 250;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>	
-					
 				</div>
-
+			
+			
 				<div class="paper_info">
 					<a name='Top'></a>
-					<a href="#Reference" class="tab">Reference</a> |
-					<a href="#CitedBy" class="tab">Cited By</a> |
-					<a href="#LNCS" class="tab">Latex</a>
 
-					<ul class="pubdetail">
+				
 						
 						<li>
 							<b>Abstract: </b>
 							<br />
-							<p style="text-indent: 2em">Mining information and knowledge from large databases has been recognized by many researchers as a key research topic in database systems and machine learning, and by many industrial companies as an important area with an opportunity of major revenues. Researchers in many different fields have shown great interest in data mining. Several emerging applications in information providing services, such as data warehousing and on-line services over the Internet, also call for various data mining techniques to better understand user behavior, to improve the service provided, and to increase the business opportunities. In response to such a demand, this article is to provide a survey, from a database researcher's point of view, on the data mining techniques developed recently. A classification of the available data mining techniques is provided, and a comparative study of such techniques is presented.</p>
-						</li>
-						
+							<p style="text-indent: 2em"><%=item.getAbstract_() %></p></li>
+						</div>
+						</div>	
+						<div id="main">
+						<div class="paper_info1">
 						<li>
 							<b>Year: </b>1996</li>
-						
-						<li>
-							<b>Pages: </b>18</li>
-						
 
-						
 						<li>
-							<b>Article:  </b>IEEE Trans. Knowl. Data Eng.
+							<b>Proceedings:  </b><%=item.getDbConference().getName() %>
+							&nbsp;&nbsp;&nbsp;
+							<%if(item.getPages()!=null){ %>
+							<%=item.getPages() %>
+							<%} %>
 						</li>
-
 						
-					</ul>
+						<li>
+							<%if(item.getSource()!=null){ %>
+							<b>Source Link:  </b>
+							<a class="url" href="<%=item.getSource()%>">
+							<%=item.getSource()%></a>
+							<%} %>
+						</li>
+						
+						<li>
+							<%if(item.getDoiLink()!=null&&item.getDoi()!=null){ %>
+							<b>Doi:  </b>
+							<a class="url" href="<%=item.getDoiLink()%>">
+							<%=item.getDoi()%></a>
+							<%} %>
+						</li>
+						</div>
+						</div>
 				</div>
 <jsp:include page="/common/footer.jsp"></jsp:include>
   </body>

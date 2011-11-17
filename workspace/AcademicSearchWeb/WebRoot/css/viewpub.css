@@ -1,0 +1,18 @@
+
+
+body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}
+.paper_info {border: dotted 0px red; float: left;width: 62%;padding: 4px;border-top: solid 1px gray;margin-top: 10px;}
+.paper_info1 {border: dotted 0px red; float: left;padding: 4px;border-top: solid 1px gray;margin-top: 10px;}
+.paper_info .tab{text-decoration: underline;}
+.paper_info ul.pubdetail{list-style: none;margin-left: 2px;padding-left:10px; }
+
+.author_info {float: right;border: solid 1px gray; width: 25%;min-height: 200px;padding: 4px;}
+.author_info span.name {font-size: 100%;font-family: verdana;font-weight: bold;color: orange;}
+.author_info ul.authorlist {list-style: none;margin-left: 2px;padding-left:10px; }
+
+.paper_op_links {margin: 2px 4px;}
+.paper_op_links a, .paper_op_links .text_link{font:13px/1.231 monospace;font-size: 12px;}
+
+
+/* override block */
+.name_block a {color: white !important}

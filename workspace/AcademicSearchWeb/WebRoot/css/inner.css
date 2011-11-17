@@ -9,7 +9,6 @@ body {
 }
 
 a { /*color:#1D6893;*/
-	color: white;
 	font-size: 13px;
 	text-decoration: none;
 }
@@ -47,6 +46,16 @@ h4 {
 	font-weight: normal;
 	color: white;
 	margin: 5px 0;
+}
+
+h5 {
+display: block;
+font-size: 2em;
+-webkit-margin-before: 0.67em;
+-webkit-margin-after: 0.67em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
 }
 
 div#upper {
@@ -120,10 +129,6 @@ ul#nav li.highlight {
 #content {
 	text-align: center;
 	/*	color:#1D6893;*/
-	color: white;
-	background: #1F729B;
-	border-top: 1px solid #1F729B;
-	border-bottom: 1px solid #1F729B;
 	min-height: 400px;
 }
 
@@ -156,7 +161,7 @@ p {
 #main {
 	text-align: left;
 	margin: 0 auto;
-	width: 760px;
+	width: 960px;
 	/*	border:1px solid red;*/
 }
 
@@ -880,7 +885,7 @@ table.assoc td {
 }
 
 a.url {
-	color: white;
+	color: blue;
 }
 
 div#floatdiv { /*border:1px solid #eee;*/ /*FILTER:alpha(opacity=60);*/
@@ -898,7 +903,7 @@ div#floatdiv { /*border:1px solid #eee;*/ /*FILTER:alpha(opacity=60);*/
 
 ul#pubdetail {
 	list-style: none;
-	margin: 0;
+	margin: 3;
 }
 
 ul#pubdetail li {

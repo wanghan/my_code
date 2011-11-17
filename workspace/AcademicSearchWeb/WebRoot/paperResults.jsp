@@ -37,43 +37,14 @@ function sub(str){
     	return true;   
 }  
 </script>
-<jsp:useBean id="tt" class="AUDRwebJavaBeans.SearchType"></jsp:useBean>
 <% 
-	String[] tfe = tt.search_type;
-	request.setAttribute("tfe",tfe);
 
 	ArrayList<DbPaper> list = (ArrayList<DbPaper>)request.getSession().getAttribute("list");
 	request.setAttribute("list",list);
 %>
-<body onload="init('${tfe[0] }')">
-	<jsp:include page="/common/header.jsp"></jsp:include>
+<body>
+	<jsp:include page="/common/header_search.jsp"></jsp:include>
 	<center>
-
-	<form action="<%=path %>/PaperSearch" method="post" name="" onsubmit="return sub('searchText')">
-	<table>
-		<tr>
-			<td>
-				<p>
-					<input type="text" name="searchText" value="${sessionScope.searchText }" size="100" style="height: 37px;width: 450px;font-size: 24">
-					<input type="submit" value=" Search " style="height: 37px;width: 170px;font-size: 24">
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>
-					<c:forEach items="${tfe}" var="tfe0" varStatus="index">
-						<input type="radio" name="fileType" id="${tfe0 }" value="${tfe0 }"/>${ tfe[index.index]}
-					</c:forEach>
-					<input type="hidden" value="${sessionScope.searchTypeE }" name="searchTypeE" id="searchTypeE">
-					<input type="hidden" value="${sessionScope.searchTypeC }" name="searchTypeE" id="searchTypeC">
-				</p>
-			</td>
-		</tr>
-	</table>
-	</form>
-	
-	
 	<div class="bodyDiv">
 
 <table width="100%">

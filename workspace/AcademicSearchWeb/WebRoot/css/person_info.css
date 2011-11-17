@@ -1,0 +1,55 @@
+/*
+Copyright (c) 2010, Arnetminer.org, All rights reserved.
+version: 0.0.1
+author: bogao
+*/
+
+/* api_person_info_tiny */
+.imws_person_info_tiny {}
+.imws_person_info_tiny .name_block {font-weight: bold;}
+.imws_person_info_tiny .name_block a {color: #0156aa; text-decoration: none;}
+.imws_person_info_tiny .name_block a:hover {text-decoration: underline;}
+.imws_person_info_tiny .name_block img {vertical-align: middle;}
+.imws_person_info_tiny table {border: none;}
+.imws_person_info_tiny table tr {border: none;margin: 0;padding: 0}
+.imws_person_info_tiny table tr td {border: none;margin: 0;padding: 1px;vertical-align: middle;}
+.imws_person_info_tiny table tr td.img {width:52px;}
+.imws_person_info_tiny table tr td.img a {overflow:hidden;width:50px;height:60px;border:0px solid #ccc;vertical-align:middle;display:block;font-size:60px;}
+.imws_person_info_tiny table tr td.img a img {vertical-align:middle;}
+.imws_person_info_tiny .picture_url {}
+.imws_person_info_tiny .right_info {padding-left: 2px;}
+.imws_person_info_tiny .profile_info {font-weight:bold;}
+.imws_person_info_tiny .statistic {}
+.imws_person_info_tiny .foot_info a {color: #0156aa;text-decoration: none;}
+.imws_person_info_tiny .foot_info a:hover {color: #00469a;text-decoration: underline;}
+
+/* api_person_info_small */
+.imws_person_info_small .name_block {font-weight: bold;}
+.imws_person_info_small .name_block a {color: #0156aa; text-decoration: none;}
+.imws_person_info_small .name_block a:hover {text-decoration: underline;}
+.imws_person_info_small table {border: none;color: #666}
+.imws_person_info_small table tr {border: none;margin: 0;padding: 0}
+.imws_person_info_small table tr td {border: none;margin: 0;padding: 1px;vertical-align: middle;}
+.imws_person_info_small .picture_url {border:solid 1px #0156aa;}
+.imws_person_info_small .image_u_r_l {border:solid 1px #0156aa;}
+.imws_person_info_small .right_info {padding-left: 2px;}
+.imws_person_info_small .statistic .label {color: #f29650}
+.imws_person_info_small .foot_info a {color: #0156aa;text-decoration: none;}
+.imws_person_info_small .foot_info a:hover {color: #00469a;text-decoration: underline;}
+
+/* api_person_info_na_select */
+.imws_person_info_naselect {}
+.imws_person_info_naselect >table {border: solid 1px gray !important;width: 150px;}
+.imws_person_info_naselect >table:hover {background-color: rgb(84,147,202);}
+.imws_person_info_naselect .name_block {font-weight: normal;}
+.imws_person_info_naselect .name_block a {color: white; text-decoration: none;}
+.imws_person_info_naselect .name_block a:hover {text-decoration: underline;}
+.imws_person_info_naselect table {border: none;color: #ddd;font-size: 12px;}
+.imws_person_info_naselect table tr {border: none;margin: 0;padding: 0}
+.imws_person_info_naselect table tr td {border: none;margin: 0;padding: 1px;vertical-align: middle;}
+.imws_person_info_naselect .picture_url {border:solid 1px #0156aa;}
+.imws_person_info_naselect .image_u_r_l {border:solid 1px #0156aa;}
+.imws_person_info_naselect .right_info {padding-left: 2px;}
+.imws_person_info_naselect .statistic .label {color: #f29650}
+.imws_person_info_naselect .foot_info a {color: #0156aa;text-decoration: none;}
+.imws_person_info_naselect .foot_info a:hover {color: #00469a;text-decoration: underline;}

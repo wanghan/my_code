@@ -53,6 +53,7 @@ public class PaperItemShowServlet extends HttpServlet{
 
 		if(list==null||id<0)
 		{
+			
 			Err(request,response,"paper id null or empty!");
 		}
 		
