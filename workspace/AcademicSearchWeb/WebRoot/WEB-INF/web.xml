@@ -6,9 +6,18 @@
   <servlet-name>PaperSearchServlet</servlet-name>
   <servlet-class>servlets.PaperSearchServlet</servlet-class>
  </servlet>
+ <servlet>
+  <display-name>PaperItemShowServlet</display-name>
+  <servlet-name>PaperItemShowServlet</servlet-name>
+  <servlet-class>servlets.PaperItemShowServlet</servlet-class>
+ </servlet>
  <servlet-mapping>
   <servlet-name>PaperSearchServlet</servlet-name>
   <url-pattern>/PaperSearch</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>PaperItemShowServlet</servlet-name>
+  <url-pattern>/PaperItemShow</url-pattern>
  </servlet-mapping>
  <!-- 设置session的有效时长 -->
  <session-config>

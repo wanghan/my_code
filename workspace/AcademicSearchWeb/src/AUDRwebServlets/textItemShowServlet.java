@@ -1,5 +1,7 @@
 package AUDRwebServlets;
 
+import hibernate.DbPaper;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,35 +44,20 @@ public class textItemShowServlet extends HttpServlet{
 		// Put your code here
 	}
 	
-	ArrayList<TextItem> list;
+	ArrayList<DbPaper> list;
 	PdfToSwf pts = new PdfToSwf();
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		
-		list = (ArrayList<TextItem>)request.getSession().getAttribute("list");
+		list = (ArrayList<DbPaper>)request.getSession().getAttribute("list");
 		String id = request.getParameter("fid");
-//		System.out.println(list);
-//		System.out.println(id);
+
 		if(list==null||id==null||id.equals(""))
 		{
-			Err(request,response,"网络错误，请稍候再查看详细信息");
-//			RequestDispatcher disp = request.getRequestDispatcher("/SearchText/searchResults.jsp");
-//				disp.forward(request, response);
+			Err(request,response,"session list is null or empty!");
 		}
 		
 		TextItem Item = new TextItem();
-		
-		if(list!=null&&list.get(0).getTqr()!=null)
-		for (int i=0;i<list.size();i++) {
-			TextQueryResult r = list.get(i).getTqr();
-			if(id.equals(r.getId()))
-			{
-				Item = list.get(i);
-			}
-		}
-		else{
-			Err(request,response,"回话失效，请重新查询！！！");
-		}
 		
 		String[] ttc = {"DOC","DOCX","XLS","XLSX","PPT","TXT","PDF"};
 		String[] tth = {"HTML"};

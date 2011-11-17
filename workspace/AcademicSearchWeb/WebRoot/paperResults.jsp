@@ -104,7 +104,7 @@ function sub(str){
 						<td>
 						<div id="publist">
 							<strong>
-								<a class="url" href="<%=path %>/textItemShow?fid=<%=ttm.getId() %>">
+								<a class="url" href="<%=path %>/PaperItemShow?fid=<%=ttm.getId() %>">
 								<%=ttm.getTitle() %>
 								</a>
 
