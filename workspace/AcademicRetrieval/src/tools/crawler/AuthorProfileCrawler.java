@@ -51,10 +51,10 @@ public class AuthorProfileCrawler {
 				}
 				cc.extract(name, id);
 				System.out.print(Calendar.getInstance().getTime()+"\t"+k+ "\t");
-				if(k%200==0){
-					Thread.sleep(1000*60*2);
-					System.out.println("run");
-				}
+//				if(k%200==0){
+//					Thread.sleep(1000*60*2);
+//					System.out.println("run");
+//				}
 			}
 			reader.close();
 			
