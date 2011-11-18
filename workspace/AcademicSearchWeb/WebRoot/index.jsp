@@ -1,40 +1,67 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@page import="client.rmi.SearchRMIClient"%>
+<%@ page language="java" import=" java.util.*"  contentType="text/html; charset=utf-8"
+pageEncoding="utf-8" isELIgnored="false" %>
+<%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>非结构化数据库管理系统</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AUDR Academic Search</title>
+<link href="<%=path %>/css/bodyCss.css" rel="stylesheet" type="text/css"/>	
+<link href="<%=path %>/css/hyperlink.css" rel="stylesheet" type="text/css"/>
+		
+<!--    <link rel="shortcut icon" href="image/images.icon" /> -->
+<script type="text/javascript" src="<%=path %>/js/textSearch.js"></script>
+<script type="text/javascript" src="<%=path %>/js/calendar.js"></script>
 
-  </head>
-  
-  <body>
-    <jsp:include page="common/header.jsp"></jsp:include>
-    <div style="text-align: center;width: 100%;background-color: white;">
-    	<font color="red" size="100">AUDR检索系统 部分效果展示</font><br>
-    	<img src="pic/indextx.png" title="点击进入图像检索系统" width="400" height="200" border="5">
-    	<img src="pic/indexwb.png" title="点击进入文本检索系统" width="400" height="200" border="5"><br>
-    	<img src="pic/indexyp.png" title="点击进入音频检索系统" width="400" height="200" border="5">
-    	<img src="pic/indexsp.png" title="点击进入视频检索系统" width="400" height="200" border="5"><br>
-    	<img src="pic/indextxx.png" title="点击进入管理系统-图像" width="400" height="200" border="5">
-    	<img src="pic/indexwbx.png" title="点击进入管理系统-文本" width="400" height="200" border="5"><br>
-    	<img src="pic/indexypx.png" title="点击进入管理系统-音频" width="400" height="200" border="5">
-    	<img src="pic/indexspx.png" title="点击进入管理系统-视频" width="400" height="200" border="5">
-    </div>
-    <jsp:include page="common/footer.jsp"></jsp:include>
-  </body>
+<!--
+<script src="js/other.js"></script>
+-->
+</head>
+
+<jsp:useBean id="tt" class="AUDRwebJavaBeans.SearchType"></jsp:useBean>
+<% 
+	SearchRMIClient.getInstance();
+	String[] tfe = tt.search_type;
+	request.setAttribute("tfe",tfe);
+%>
+<body onload="init('<%=path %>','${tfe[0] }')">
+   <jsp:include page="/common/header.jsp"></jsp:include>
+
+	<center>
+	
+	<form action="<%=path %>/PaperSearch" method="post" name="" onsubmit="return sub('searchText')">
+	<table>
+		<tr>
+			<td>
+				<p>
+					<input type="text" name="searchText" size="100" style="height: 37px;width: 450px;font-size: 24">
+					<input type="submit" value=" Search " style="height: 37px;width: 170px;font-size: 24">
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<c:forEach items="${tfe}" var="tfe0" varStatus="index">
+						<input type="radio" name="fileType" id="${tfe0 }" value="${tfe0 }" />${ tfe[index.index]}
+					</c:forEach>
+				</p>
+			</td>
+		</tr>
+	</table>
+	
+	
+	
+	<div class="bodyDiv">
+	<hr color="#6699CC"/>	
+
+	</div>
+	
+	</form>	
+	
+	</center>
+
+	<jsp:include page="/common/footer.jsp"></jsp:include>
+</body>
 </html>

@@ -135,9 +135,9 @@ public class PaperSearchServlet extends HttpServlet {
 		// SimpleDateFormat fmt=new SimpleDateFormat("yyyyMMddhh");
 		
 		List<DbPaper> result=null;
-
+		
 		try {
-			result=SearchRMIClient.getInstance().searchPapers(searchText);
+			result=SearchRMIClient.getInstance().getTestPaperList();
 
 		} catch (Exception e) {
 			// TODO: handle exception

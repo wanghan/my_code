@@ -88,9 +88,9 @@ function sub(str){
 							for(int j=0;j<authors.length-1;j++)
 							{
 							%>
-								<a href="<%=path %>/textItemShow?fid=<%=authors[j].getName()%>"><%=authors[j].getName()%></a>, 
+								<a href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
 							<%}%>
-							<a href="<%=path %>/textItemShow?fid=<%=authors[authors.length-1].getName()%>"><%=authors[authors.length-1].getName()%></a> 
+							<a href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a> 
 							<br/></li>
 							<li><span>Proceedings:</span>   <%="\t\t"+ttm.getDbConference().getName() %><br/></li>
 							<li><span>Published year:</span>    <%="\t\t"+ttm.getDbConference().getDate()%></li>

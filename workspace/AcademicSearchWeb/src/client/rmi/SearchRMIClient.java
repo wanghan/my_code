@@ -50,7 +50,7 @@ public class SearchRMIClient {
 	private SearchRMIClient() {
 		// TODO Auto-generated constructor stub
 		try {
-			searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
+	//		searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
 			session = HibernateSessionFactory.getSession();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -93,6 +93,23 @@ public class SearchRMIClient {
 		List<DbPaper> result = criter.list();
 		
 		return result;
+	}
+	
+	/**
+	 * 
+	 * @param id db id
+	 * @return
+	 */
+	public DbAuthor getDbAuthorFromDb(long id){
+		Criteria criter = session.createCriteria(DbAuthor.class);
+		Criterion cron = Restrictions.eq("id", id);
+		criter.add(cron);
+		List<DbAuthor> result = criter.list();
+		
+		if(result.size()>0)
+			return result.get(0);
+		else
+			return null;
 	}
 	
 	public Integer[] searchAuthors(String keywords) throws Exception{

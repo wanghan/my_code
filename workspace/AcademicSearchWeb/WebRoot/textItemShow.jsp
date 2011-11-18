@@ -63,7 +63,7 @@
 						<img src="<%=path %>/author_profile/81100002314.jpg" align="center" onload="DrawImage(this,70,70)">
 						</td>
 						<td>
-						<li><a href="<%=path %>/textItemShow?fid=<%=authors[i].getName()%>"><%=authors[i].getName() %></a></li>
+						<li><a href="<%=path %>/authorItemShow?fid=<%=authors[i].getId()%>"><%=authors[i].getName() %></a></li>
 						</td>
 						</tr>
 						
