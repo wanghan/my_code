@@ -18,15 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import client.rmi.SearchRMIClient;
-
-import sys.TextQueryResult;
-import AUDRwebJavaBeans.TextBasicFeature;
-import AUDRwebJavaBeans.TextItem;
-import AUDRwebJavaBeans.TextModel;
-import AUDRwebJavaBeans.TextSemanticFeature;
 import AUDRwebJavaBeans.SearchType;
-import Common.SYSPROPERTIES;
+
+import client.rmi.SearchRMIClient;
 
 public class PaperSearchServlet extends HttpServlet {
 
