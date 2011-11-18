@@ -31,8 +31,8 @@ public class Client {
 			
 			SearcherRMIInterface searcher=(SearcherRMIInterface)Naming.lookup("//localhost:1099/searcher");
 			
-			testSearchPaper(searcher);
-			testSearchAuthor(searcher);
+//			testSearchPaper(searcher);
+//			testSearchAuthor(searcher);
 			
 			testAssociateSearchAuthor(searcher);
 			
@@ -46,33 +46,14 @@ public class Client {
 	
 	public static void testAssociateSearchAuthor(SearcherRMIInterface searcher) throws Exception{
 		
-//		int id=100;
-//		
-//		Document xmlDocument = DocumentHelper.createDocument();
-//		Element root = xmlDocument.addElement("result");
-//		String title=searcher.getPaperTitleById(id);
-//		Element id1Node=root.addElement("query");
-//		id1Node.addText(title);
-//
-//		AssociateResult result[]=searcher.getAssociatePapers(id);
-//		for (AssociateResult associateResult : result) {
-//			Element idNode=root.addElement("title");
-//			idNode.addText(String.valueOf(associateResult.title));
-//			for (Paper list : associateResult.list) {
-//				idNode.add(list.toXMLElement());
-//			}
-//		}
-//		
-//		FileWriter out = new FileWriter("./associate_paper_result.xml");
-//		OutputFormat format=new OutputFormat();
-//		format.setNewlines(true);
-//		format.setEncoding("UTF-8");
-//		XMLWriter  writer=new XMLWriter(out,format);
-//		writer.write(xmlDocument);
-//		
-//		writer.flush();
-//		writer.close();
-//		out.close();
+		int id=105;
+		
+
+		AssociateResult result[]=searcher.getAssociatePapers(id);
+		for (AssociateResult associateResult : result) {
+			System.out.println(associateResult.title);
+		}
+		
 	}
 	public static void testSearchAuthor(SearcherRMIInterface searcher) throws Exception{
 //		Author []result1=searcher.searchAuthors("data mining");

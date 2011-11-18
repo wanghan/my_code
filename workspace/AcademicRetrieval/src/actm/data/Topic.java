@@ -28,6 +28,7 @@ public class Topic implements Serializable{
 	
 	public int index;
 	public ArrayList<String> tags;
+	//id is tm index;
 	public ArrayList<Integer> topRelatedPaperIds;
 	public ArrayList<Integer> topRelatedAuthorIds;
 	public ArrayList<Integer> topRelatedConferenceIds;

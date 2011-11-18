@@ -4,8 +4,9 @@
 package rmi;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import actm.data.Paper;
+import actm.data.Topic;
 
 /**
  * @author wanghan
@@ -24,8 +25,12 @@ public class AssociateResult implements Serializable{
 		// TODO Auto-generated method stub
 
 	}
-	
 	public String title;
-	public Paper[] list;
+	public ArrayList<String> topWords;
+	public Topic topic;
 
+	
+	public AssociateResult(){
+		this.topWords=new ArrayList<String>();
+	}
 }

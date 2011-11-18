@@ -7,6 +7,8 @@ import hibernate.DbAuthor;
 import hibernate.DbPaper;
 import hibernate.HibernateSessionFactory;
 
+import rmi.*;
+
 import java.rmi.Naming;
 import java.util.List;
 
@@ -28,7 +30,18 @@ public class SearchRMIClient {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		int id=105;
+		
+		try {
+			AssociateResult result[]=SearchRMIClient.getInstance().getAssociatePapers(id);
+			for (AssociateResult associateResult : result) {
+				System.out.println(associateResult.title);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 	}
 	private SearcherRMIInterface searcher;
 	private static SearchRMIClient instance=null;
@@ -36,7 +49,7 @@ public class SearchRMIClient {
 	private SearchRMIClient() {
 		// TODO Auto-generated constructor stub
 		try {
-	//		searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
+			searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
 			session = HibernateSessionFactory.getSession();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -64,5 +77,9 @@ public class SearchRMIClient {
 		if(instance==null)
 			instance=new SearchRMIClient();
 		return instance;
+	}
+	
+	public AssociateResult[] getAssociatePapers(int papertmindex) throws Exception{
+		return searcher.getAssociatePapers(papertmindex);
 	}
 }
