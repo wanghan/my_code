@@ -124,6 +124,7 @@ public class PaperSearchServlet extends HttpServlet {
 		String searchTypeC = "";
 
 		String searchText = "";
+		searchText=request.getParameter("searchText");
 		System.out.println("searching keywords "+searchText);
 
 		
@@ -136,7 +137,7 @@ public class PaperSearchServlet extends HttpServlet {
 		List<DbPaper> result=null;
 
 		try {
-			result=SearchRMIClient.getInstance().getTestPaperList();
+			result=SearchRMIClient.getInstance().searchPapers(searchText);
 
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -1,3 +1,4 @@
+<%@page import="client.rmi.SearchRMIClient"%>
 <%@ page language="java" import=" java.util.*"  contentType="text/html; charset=utf-8"
 pageEncoding="utf-8" isELIgnored="false" %>
 <%@ include file="/common/taglibs.jsp"%>
@@ -20,6 +21,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 
 <jsp:useBean id="tt" class="AUDRwebJavaBeans.SearchType"></jsp:useBean>
 <% 
+	SearchRMIClient.getInstance();
 	String[] tfe = tt.search_type;
 	request.setAttribute("tfe",tfe);
 %>

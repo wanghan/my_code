@@ -10,6 +10,7 @@ import hibernate.HibernateSessionFactory;
 import rmi.*;
 
 import java.rmi.Naming;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -81,5 +82,20 @@ public class SearchRMIClient {
 	
 	public AssociateResult[] getAssociatePapers(int papertmindex) throws Exception{
 		return searcher.getAssociatePapers(papertmindex);
+	}
+	
+	public List<DbPaper> searchPapers(String keywords) throws Exception{
+		Integer[] re= searcher.searchPapers(keywords);
+		
+		Criteria criter = session.createCriteria(DbPaper.class);
+		Criterion cron = Restrictions.in("tmIndex", re);
+		criter.add(cron);
+		List<DbPaper> result = criter.list();
+		
+		return result;
+	}
+	
+	public Integer[] searchAuthors(String keywords) throws Exception{
+		return searcher.searchAuthors(keywords);
 	}
 }
