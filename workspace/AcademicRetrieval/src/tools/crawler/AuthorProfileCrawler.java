@@ -34,7 +34,7 @@ public class AuthorProfileCrawler {
 //			ACTMDataSet data=new ACMCorpusLoader().loadAllData_Small(globalData,null);
 //			Thread.sleep(3600*1000);
 			System.out.println("run");
-			Scanner reader=new Scanner(new File("./aaa.txt"));
+			Scanner reader=new Scanner(new File("./aaa1.txt"));
 			
 			AuthorProfileCrawler cc=new AuthorProfileCrawler();
 			
@@ -68,7 +68,7 @@ public class AuthorProfileCrawler {
 
 	
 	private static String save_path="./author_profile/";
-	private static String temp_path="./author_temp/";
+	private static String temp_path="E:/author_temp/";
 	
 	public void extract(String name, String id){
 		
