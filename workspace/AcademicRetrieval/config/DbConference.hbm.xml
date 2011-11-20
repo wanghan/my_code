@@ -52,13 +52,11 @@
 			not-null="true"
 			length="19"
 		/>
-	
+
 
 		<set name="DbPapers" inverse="true">
 			<key column="id"/>
 			<one-to-many class="DbPaper"/>
 		</set>
-
-
 	</class>	
 </hibernate-mapping>

@@ -79,7 +79,8 @@
 			not-null="true"
 		>
 		</many-to-one>
-	
+
+
 		<set
 			name="DbAuthors"
 			table="db_paper_authors"
@@ -88,7 +89,6 @@
 			<key column="paper_id"/>
 			<many-to-many column="author_id" class="DbAuthor"/>
 		</set>
-
 
 	</class>	
 </hibernate-mapping>
