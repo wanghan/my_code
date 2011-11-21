@@ -131,7 +131,7 @@ public class PaperSearchServlet extends HttpServlet {
 		List<DbPaper> result=null;
 		
 		try {
-			result=SearchRMIClient.getInstance().getTestPaperList();
+			result=SearchRMIClient.getInstance().searchPapers(searchText);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -153,6 +153,7 @@ public class PaperSearchServlet extends HttpServlet {
 		// 声明检索结束时间
 		long e = System.currentTimeMillis();
 
+		
 		ArrayList<DbPaper> list = new ArrayList<DbPaper>();
 		if (result != null)
 			list = this.TISList(0, result);		

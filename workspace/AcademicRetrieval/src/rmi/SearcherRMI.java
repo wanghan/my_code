@@ -2,11 +2,8 @@ package rmi;
 
 import java.io.IOException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
 
 import org.apache.lucene.index.CorruptIndexException;
-
-import db.MysqlConnection;
 
 import utils.SerializeUtils;
 
@@ -35,21 +32,21 @@ public class SearcherRMI extends UnicastRemoteObject implements SearcherRMIInter
 		associationModel=(TopicAssociationModel)SerializeUtils.deSerialize(TopicAssociationModel.storagePath);
 	}
 	
-	public Integer[] searchPapers(String keywords) throws Exception{
+	public Integer[] searchPapers(String keywords) throws IOException{
 		System.out.println("Searching paper, keyword :"+keywords);
 		Integer re[]=searcher.searchPaper(keywords);
 		System.out.println("-------------------------------------------------------------------------");
 		return re;
 	}
 	
-	public Integer[] searchAuthors(String keywords) throws Exception{
+	public Integer[] searchAuthors(String keywords) throws IOException{
 		System.out.println("Searching author, keyword :"+keywords);
 		Integer re[]=searcher.searchAuthor(keywords);
 		System.out.println("-------------------------------------------------------------------------");
 		return re;
 	}
 	
-	public AssociateResult[] getAssociatePapers(int papertmId) throws Exception{
+	public AssociateResult[] getAssociatePapers(int papertmId) throws IOException{
 		long before=System.currentTimeMillis();
 		AssociateResult[] re=new AssociateResult[5];
 		for(int i=0;i<5;++i){

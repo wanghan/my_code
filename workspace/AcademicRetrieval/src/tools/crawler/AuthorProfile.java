@@ -3,16 +3,8 @@
  */
 package tools.crawler;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
-
-import actm.data.Author;
-import actm.data.Conference;
-import actm.data.Paper;
 
 /**
  * @author wanghan

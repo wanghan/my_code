@@ -1,3 +1,5 @@
+<%@page import="java.io.File"%>
+<%@page import="common.Configuration"%>
 <%@ page language="java" import="java.util.*,hibernate.*"
 	pageEncoding="utf-8"%>
 <%@ include file="/common/taglibs.jsp"%>
@@ -39,6 +41,12 @@
 
 	<%
 		DbAuthor item = (DbAuthor) request.getAttribute("author");
+		String imagepath=path+"/author_profile/no_image.jpg";
+
+		String newPath=Configuration.getInstance().getProfileImagePath()+String.valueOf(item.getId())+".jpg";
+		if(new File(newPath).exists()){
+			imagepath=newPath;
+		}
 	%>
 	<body>
 		<jsp:include page="/common/header_search.jsp"></jsp:include>
@@ -47,7 +55,7 @@
 		<div style="float: right;">
 
 			<img class="portray" border="1"
-				src="http://www.cs.uiuc.edu/homes/hanj/images/hanj_tour.jpg"
+				src="<%=imagepath %>"
 				style="" width="250" onload="resizeimg(this, 250, 500);">
 
 		</div>
@@ -63,7 +71,7 @@
 			</h1>
 
 			<table id="viewperson">
-				<%if(item.getPosition()!=null) {%>
+				<%if(item.getPosition()!=null&&item.getPosition().length()>0) {%>
 				<tr>
 					<th>
 						Title:
@@ -73,7 +81,7 @@
 					</td>
 				</tr>
 				<%} %>
-				<%if(item.getPosition()!=null) {%>
+				<%if(item.getAffiliation()!=null&&item.getAffiliation().length()>0) {%>
 				<tr>
 					<th>
 						Affiliation:
@@ -83,7 +91,7 @@
 					</td>
 				</tr>
 				<%} %>
-				<%if(item.getPosition()!=null) {%>
+				<%if(item.getAddress()!=null&&item.getAddress().length()>0) {%>
 				<tr>
 					<th>
 						Address:
@@ -93,7 +101,7 @@
 					</td>
 				</tr>
 				<%} %>
-				<%if(item.getHomepage()!=null) {%>
+				<%if(item.getHomepage()!=null&&item.getHomepage().length()>0) {%>
 				<tr>
 					<th>
 						Homepage:
@@ -104,7 +112,7 @@
 					</td>
 				</tr>
 				<%} %>
-				<%if(item.getLink()!=null) {%>
+				<%if(item.getLink()!=null&&item.getLink().length()>0) {%>
 				<tr>
 					<th>
 						ACM Library Page:
@@ -123,7 +131,7 @@
 						<%=item.getDbPapers().size() %>
 					</td>
 				</tr>
-				<%if(item.getInterest()!=null) {%>
+				<%if(item.getInterest()!=null&&item.getInterest().length()>0) {%>
 				<tr>
 					<th>
 						Research Interest:

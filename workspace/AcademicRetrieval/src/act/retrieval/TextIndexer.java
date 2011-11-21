@@ -6,28 +6,19 @@ package act.retrieval;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Vector;
-
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-import rmi.ModelLoaderRMIClient;
-
 import utils.StringUtils;
 
-import act.corpus.ACMCorpusLoader;
 import act.model.ACTModel;
 import actm.data.ACTMDataSet;
 import actm.data.ACTMDocument;
-import actm.data.ACTMGlobalData;
 import actm.data.Author;
 import actm.data.Conference;
-import atm.labeling.LabelingUtils;
-import atm.labeling.Parse;
 
 
 

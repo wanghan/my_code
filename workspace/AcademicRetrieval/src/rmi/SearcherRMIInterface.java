@@ -3,9 +3,8 @@
  */
 package rmi;
 
+import java.io.IOException;
 import java.rmi.Remote;
-
-import org.hibernate.Session;
 
 
 /**
@@ -13,7 +12,7 @@ import org.hibernate.Session;
  *
  */
 public interface SearcherRMIInterface extends Remote {
-	public Integer[] searchPapers(String keywords) throws Exception;
-	public Integer[] searchAuthors(String keywords) throws Exception;
-	public AssociateResult[] getAssociatePapers(int paperId) throws Exception;
+	public Integer[] searchPapers(String keywords) throws IOException;
+	public Integer[] searchAuthors(String keywords) throws IOException;
+	public AssociateResult[] getAssociatePapers(int paperId) throws IOException;
 }

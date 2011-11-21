@@ -41,11 +41,11 @@ public class RAMDictionary implements Serializable{
 			
 			SerializeUtils.serialize(ram, RAMDictionary.storagePath);
 			
-			long cur1=System.currentTimeMillis();
-			RAMDictionary test=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
-			
-			
-			System.out.println(System.currentTimeMillis()-cur1);
+//			long cur1=System.currentTimeMillis();
+//			RAMDictionary test=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
+//			
+//			
+//			System.out.println(System.currentTimeMillis()-cur1);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

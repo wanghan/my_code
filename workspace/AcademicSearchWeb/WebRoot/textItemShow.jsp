@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,hibernate.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,hibernate.*,java.io.*,common.*" pageEncoding="utf-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -60,7 +60,14 @@
 						%>
 						<tr>
 						<td>
-						<img src="<%=path %>/author_profile/81100002314.jpg" align="center" onload="DrawImage(this,70,70)">
+						<%String imagepath=path+"/author_profile/no_image.jpg";
+
+						String newPath=Configuration.getInstance().getProfileImagePath()+String.valueOf(item.getId())+".jpg";
+						if(new File(newPath).exists()){
+							imagepath=newPath;
+						} 
+						%>
+						<img src="<%=imagepath %>" align="center" onload="DrawImage(this,70,70)">
 						</td>
 						<td>
 						<li><a href="<%=path %>/authorItemShow?fid=<%=authors[i].getId()%>"><%=authors[i].getName() %></a></li>
@@ -117,6 +124,7 @@
 						</div>
 						</div>
 				</div>
+<jsp:include page="/topicAssociateShow.jsp"></jsp:include>
 <jsp:include page="/common/footer.jsp"></jsp:include>
   </body>
 </html>

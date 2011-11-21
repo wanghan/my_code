@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
-
 import org.dom4j.DocumentException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

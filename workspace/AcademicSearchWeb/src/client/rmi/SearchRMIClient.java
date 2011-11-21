@@ -9,6 +9,7 @@ import hibernate.HibernateSessionFactory;
 
 import rmi.*;
 
+import java.io.IOException;
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class SearchRMIClient {
 	private SearchRMIClient() {
 		// TODO Auto-generated constructor stub
 		try {
-	//		searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
+			searcher = (SearcherRMIInterface) Naming.lookup("//localhost:1099/searcher");
 			session = HibernateSessionFactory.getSession();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -80,15 +81,24 @@ public class SearchRMIClient {
 		return instance;
 	}
 	
-	public AssociateResult[] getAssociatePapers(int papertmindex) throws Exception{
+	public AssociateResult[] getAssociatePapers(int papertmindex) throws IOException{
 		return searcher.getAssociatePapers(papertmindex);
 	}
 	
-	public List<DbPaper> searchPapers(String keywords) throws Exception{
+	public List<DbPaper> searchPapers(String keywords) throws IOException{
 		Integer[] re= searcher.searchPapers(keywords);
 		
 		Criteria criter = session.createCriteria(DbPaper.class);
 		Criterion cron = Restrictions.in("tmIndex", re);
+		criter.add(cron);
+		List<DbPaper> result = criter.list();
+		
+		return result;
+	}
+	
+	public List<DbPaper> getDbPapersInDBByTmIndex(List<Integer> ids){		
+		Criteria criter = session.createCriteria(DbPaper.class);
+		Criterion cron = Restrictions.in("tmIndex", ids);
 		criter.add(cron);
 		List<DbPaper> result = criter.list();
 		
@@ -105,6 +115,18 @@ public class SearchRMIClient {
 		Criterion cron = Restrictions.eq("id", id);
 		criter.add(cron);
 		List<DbAuthor> result = criter.list();
+		
+		if(result.size()>0)
+			return result.get(0);
+		else
+			return null;
+	}
+	
+	public DbPaper getDbPaperFromDb(int id){
+		Criteria criter = session.createCriteria(DbPaper.class);
+		Criterion cron = Restrictions.eq("id", id);
+		criter.add(cron);
+		List<DbPaper> result = criter.list();
 		
 		if(result.size()>0)
 			return result.get(0);

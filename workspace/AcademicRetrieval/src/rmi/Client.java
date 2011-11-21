@@ -3,17 +3,7 @@
  */
 package rmi;
 
-import java.io.FileWriter;
 import java.rmi.Naming;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
-
-import actm.data.Author;
-import actm.data.Paper;
 
 /**
  * @author wanghan
