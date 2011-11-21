@@ -3,8 +3,16 @@
  */
 package tools.crawler;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
+
+import actm.data.Author;
+import actm.data.Conference;
+import actm.data.Paper;
 
 /**
  * @author wanghan
@@ -109,5 +117,16 @@ public class AuthorProfile {
 			node5.addText("");
 		}
 		return root;
+	}
+	
+	public static AuthorProfile xmlToInstance(Element element){
+		AuthorProfile result=new AuthorProfile();
+		result.setAddress(element.elementText("Address").trim());
+		result.setAffiliation(element.elementText("Affiliation").trim());
+		result.setHomepage(element.elementText("Homepage").trim());
+		result.setId(element.elementText("Id").trim());
+		result.setInterest(element.elementText("Interest").trim());
+		result.setPosition(element.elementText("Position").trim());
+		return result;
 	}
 }
