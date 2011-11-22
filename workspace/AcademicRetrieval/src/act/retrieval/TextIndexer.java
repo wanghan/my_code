@@ -38,16 +38,14 @@ public class TextIndexer {
 			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
 			TextIndexer indexer= new TextIndexer(model.dataSet);
 			indexer.indexAllPapers(TextIndexer.paperIndexDir);
-			indexer.dispose();
+			indexer.indexAllAuthors(TextIndexer.authorIndexDir);
+			indexer.indexAllConferences(TextIndexer.confIndexDir);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	
 	}
-
-
-
 
 	private static void testInsertPapers(ACTMDataSet data) {
 		try {

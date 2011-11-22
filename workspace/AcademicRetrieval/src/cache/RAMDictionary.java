@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import act.model.ACTModel;
+import act.model.associate.TopicAssociationModel;
+import act.model.associate.TopicAssociator;
 import actm.data.ACTMDocument;
 import actm.data.ACTMGlobalData;
 import actm.data.Author;
@@ -40,6 +42,10 @@ public class RAMDictionary implements Serializable{
 			RAMDictionary ram=new RAMDictionary(model,globalData);
 			
 			SerializeUtils.serialize(ram, RAMDictionary.storagePath);
+			
+			
+			TopicAssociationModel assModel=TopicAssociator.modelingAssociation(model);
+			SerializeUtils.serialize(assModel, TopicAssociationModel.storagePath);	
 			
 //			long cur1=System.currentTimeMillis();
 //			RAMDictionary test=(RAMDictionary)SerializeUtils.deSerialize(RAMDictionary.storagePath);
@@ -102,12 +108,23 @@ public class RAMDictionary implements Serializable{
 			doc.getPaper().topicWeight=new  double[model.T]; 
 			for(int i=0;i<model.T;++i){
 				doc.getPaper().topicWeight[i]=0;
-				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
-				while(ita.hasNext()){
-					Author cur=ita.next();
-					doc.getPaper().topicWeight[i]+=model.theta[i][cur.getIndex()];
+				
+				//measure topic weight of document by author
+				
+//				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
+//				while(ita.hasNext()){
+//					Author cur=ita.next();
+//					doc.getPaper().topicWeight[i]+=model.theta[i][cur.getIndex()];
+//				}
+//				doc.getPaper().topicWeight[i]/=doc.getPaper().getAuthors().size();
+				
+				//measure topic weight of document by word
+				
+				for (Word w : doc.getBagOfWords()) {
+					doc.getPaper().topicWeight[i]+=model.phi[w.Index][i];
 				}
-				doc.getPaper().topicWeight[i]/=doc.getPaper().getAuthors().size();
+				doc.getPaper().topicWeight[i]/=doc.getBagOfWordSize();
+				
 			}
 			tmIndexDocumentMap.put(doc.getIndex(), doc.getPaper());
 		}

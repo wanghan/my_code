@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import tm.generalmodel.Word;
 import utils.IndexValuePairSorting;
 import utils.KeyValuePair;
 import utils.SerializeUtils;
@@ -93,12 +94,22 @@ public class TopicAssociator {
 				docWeight[i]=0.0;
 			}
 			for (int i = 0; i < model.T; ++i) {
-				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
-				while(ita.hasNext()){
-					Author cur=ita.next();
-					docWeight[i]+=model.theta[i][cur.getIndex()];
+				
+				//measure topic weight of document by author
+				
+//				Iterator<Author> ita=doc.getPaper().getAuthors().iterator();
+//				while(ita.hasNext()){
+//					Author cur=ita.next();
+//					docWeight[i]+=model.theta[i][cur.getIndex()];
+//				}
+//				docWeight[i]/=doc.getPaper().getAuthors().size();
+				
+				//measure topic weight of document by word
+				
+				for (Word w : doc.getBagOfWords()) {
+					docWeight[i]+=model.phi[w.Index][i];
 				}
-				docWeight[i]/=doc.getPaper().getAuthors().size();
+				docWeight[i]/=doc.getBagOfWordSize();
 			}
 			IndexValuePairSorting<Double> paperSorting=new IndexValuePairSorting<Double>(docWeight);
 			ArrayList<KeyValuePair<Integer, Double>> paperSortResult=paperSorting.sort(true);
