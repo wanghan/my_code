@@ -28,15 +28,15 @@ public class DbAuthorProfileUpdater {
 	}
 
 	
-	private static String save_path="E:/author_profile/";
-	private static String temp_path="E:/author_temp/";
+	private static String save_path="H:/author_profile/";
+	private static String temp_path="H:/author_temp/";
 	
 	
 	public static void update(){
 		try {
 			
 			System.out.println("run");
-			Scanner reader=new Scanner(new File("./aaa1.txt"));
+			Scanner reader=new Scanner(new File("./aaa.txt"));
 			Session session =  HibernateUtil.getSessionFactory().getCurrentSession(); 
 			session.beginTransaction();  
 			int k=0;

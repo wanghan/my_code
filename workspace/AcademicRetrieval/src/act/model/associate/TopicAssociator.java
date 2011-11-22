@@ -25,17 +25,13 @@ public class TopicAssociator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
 			ACTModel model=ACTModel.LoadWholeModel("./ACTModels/1319975613762_I100_T100/1320018826651.model");
 			TopicAssociationModel assModel=TopicAssociator.modelingAssociation(model);
-			SerializeUtils.serialize(assModel, TopicAssociationModel.storagePath);
-			
+			SerializeUtils.serialize(assModel, TopicAssociationModel.storagePath);	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
