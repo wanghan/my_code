@@ -85,6 +85,10 @@ public class SearchRMIClient {
 		return searcher.getAssociatePapers(papertmindex);
 	}
 	
+	public AssociateResult[] getAssociateAuthors(int authortmindex) throws IOException{
+		return searcher.getAssociateAuthors(authortmindex);
+	}
+	
 	public List<DbPaper> searchPapers(String keywords) throws IOException{
 		Integer[] re= searcher.searchPapers(keywords);
 		
@@ -101,6 +105,15 @@ public class SearchRMIClient {
 		Criterion cron = Restrictions.in("tmIndex", ids);
 		criter.add(cron);
 		List<DbPaper> result = criter.list();
+		
+		return result;
+	}
+	
+	public List<DbAuthor> getDbAuthorsInDBByTmIndex(List<Integer> ids){		
+		Criteria criter = session.createCriteria(DbAuthor.class);
+		Criterion cron = Restrictions.in("tmIndex", ids);
+		criter.add(cron);
+		List<DbAuthor> result = criter.list();
 		
 		return result;
 	}
@@ -134,7 +147,13 @@ public class SearchRMIClient {
 			return null;
 	}
 	
-	public Integer[] searchAuthors(String keywords) throws Exception{
-		return searcher.searchAuthors(keywords);
+	public List<DbAuthor> searchAuthors(String keywords) throws Exception{
+		Integer [] re= searcher.searchAuthors(keywords);
+		Criteria criter = session.createCriteria(DbAuthor.class);
+		Criterion cron = Restrictions.in("tmIndex", re);
+		criter.add(cron);
+		List<DbAuthor> result = criter.list();
+		
+		return result;
 	}
 }

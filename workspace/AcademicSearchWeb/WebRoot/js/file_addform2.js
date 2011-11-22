@@ -12,11 +12,11 @@ Array.prototype.remove=function(dx)
     {
         if(this[i]!=this[dx])
         {
-            this[n++]=this[i]
+            this[n++]=this[i];
         }
     }
-    this.length-=1
-  }
+    this.length-=1;
+  };
   
 //数组查找
 Array.prototype.lastIndexOf=function(substr,start){
@@ -25,7 +25,7 @@ Array.prototype.lastIndexOf=function(substr,start){
 	ta=ta.reverse();var str=d+ta.join(d)+d,t=str.indexOf(d+substr+d);
 	if(t==-1)return -1;rt+=str.slice(t).replace(/[^\0]/g,'').length-2;
 	return rt;
-}
+};
 	
 /////////////////////////////////////////////////
 //以下为当前ajax处理文档信息

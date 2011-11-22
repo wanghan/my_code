@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-<form action="<%=path %>/PaperSearch" method="post" name="" onsubmit="return sub('searchText')">
+<form action="<%=path %>/SearchResult" method="post" name="" onsubmit="return sub('searchText')">
 	<div style="height: 87px;;">
 		<table width="100%">
 			<tr>

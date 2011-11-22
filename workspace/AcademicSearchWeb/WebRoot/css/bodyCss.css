@@ -12,7 +12,7 @@ font-size: 14px;
 
 .bodyDiv{
 	width: 890px;
-	background-color:#ffffff;
+	border:1px;border:solid;border:#fA3BFE7;
 }
 .bodyTab{
 	width: 890px;

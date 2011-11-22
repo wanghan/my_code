@@ -38,45 +38,40 @@
   %>
   <body>
   <div id="main2">
-  	<div id="left_panel">
+  	<div style="border: solid 1px #6fbee7; margin-bottom: 20px; float: left;" width="100%">
 			
-			<table>
-			<%for(int i=0;i<item.size();++i){
-				if(i%2==0){
-					%>
-					<tr>
-					<%}else{ %>
-					<tr bgcolor="#eeeeee">
-					<%} %>
-					
-					
+			<table width="100%">
+			<%for(int i=0;i<item.size();++i){%>
+				<tr>
 					<td>
 						<div id="publist">
-						<%=item.get(i).getTitle() %>
-						</br>
-						<table>
+						<table width="100%"><tbody>
+						<tr  style="padding:0;margin:5px;height:13px;">
+						<td valign="top" colspan="2" style="border: solid #e0e0a0 1px;padding: 1px;margin: 1px;text-align: center; " bgColor="#909090">
+							<div><b><%=item.get(i).getTitle() %></b></div>
+						</td>
+						</tr>
 						<%for(int k=0;k<5;++k){
 							DbPaper ttm=item.get(i).getTopPapers().get(k);
 						%>
 							<tr>
-							<strong>
-								<a class="url" href="<%=path %>/PaperItemShow?fid=<%=ttm.getId() %>">
-								<%=ttm.getTitle() %>
-								</a>
-
-							</strong>
-							<li>
+							<td valign="top">[<%=k+1 %>]</td>
+							<td>
 							<%
 							DbAuthor []authors=(DbAuthor [])ttm.getDbAuthors().toArray(new DbAuthor[0]);
 							for(int j=0;j<authors.length-1;j++)
 							{
 							%>
-								<a href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
+								<a class="url" href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
 							<%}%>
-							<a href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a> 
-							<br/></li>
-							</tr>
+							<a class="url" href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a>.  
+								<b><a href="<%=path %>/PaperItemShow?fid=<%=ttm.getId() %>">
+								<%=ttm.getTitle() %>
+								</a></b>
+							
+							</td></tr>
 						<%} %>
+						</tbody>
 						</table>
 						</div>
 						</td>

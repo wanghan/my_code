@@ -60,14 +60,15 @@
 						%>
 						<tr>
 						<td>
-						<%String imagepath=path+"/author_profile/no_image.jpg";
+						<%String imagepath="/profile/no_image.jpg";
 
-						String newPath=Configuration.getInstance().getProfileImagePath()+String.valueOf(item.getId())+".jpg";
-						if(new File(newPath).exists()){
+						String newPath="/profile/"+String.valueOf(authors[i].getId())+".jpg";
+						String realPath="H:/author_profile/"+String.valueOf(authors[i].getId())+".jpg";
+						if(new File(realPath).exists()){
 							imagepath=newPath;
 						} 
 						%>
-						<img src="<%=imagepath %>" align="center" onload="DrawImage(this,70,70)">
+						<img src="<%=imagepath %>" align="center" border="1" width="70" onload="resizeimg(this,70,70)">
 						</td>
 						<td>
 						<li><a href="<%=path %>/authorItemShow?fid=<%=authors[i].getId()%>"><%=authors[i].getName() %></a></li>
@@ -96,7 +97,7 @@
 						<div id="main">
 						<div class="paper_info1">
 						<li>
-							<b>Year: </b>1996</li>
+							<b>Year: </b><%=String.valueOf(1900+item.getDbConference().getDate().getYear()) %></li>
 
 						<li>
 							<b>Proceedings:  </b><%=item.getDbConference().getName() %>

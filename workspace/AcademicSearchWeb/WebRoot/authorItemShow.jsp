@@ -5,8 +5,17 @@
 <%@ include file="/common/taglibs.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<%
+		DbAuthor item = (DbAuthor) request.getAttribute("author");
+		String imagepath="/profile/no_image.jpg";
+		String newPath="/profile/"+String.valueOf(item.getId())+".jpg";
+		String realPath="H:/author_profile/"+String.valueOf(item.getId())+".jpg";
+		if(new File(realPath).exists()){
+			imagepath=newPath;
+		} 
+%>
 	<head>
-		<title>Paper Details</title>
+		<title>Author Details : <%=item.getName() %></title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -38,16 +47,6 @@
 	background: #000000;
 }
 </style>
-
-	<%
-		DbAuthor item = (DbAuthor) request.getAttribute("author");
-		String imagepath=path+"/author_profile/no_image.jpg";
-
-		String newPath=Configuration.getInstance().getProfileImagePath()+String.valueOf(item.getId())+".jpg";
-		if(new File(newPath).exists()){
-			imagepath=newPath;
-		}
-	%>
 	<body>
 		<jsp:include page="/common/header_search.jsp"></jsp:include>
 		<div id="content">
@@ -144,8 +143,13 @@
 			</table>
 		</div>
 		<div id="main">
-		<table width="100%">
-		<tr><td>Publications:</td></tr>
+		<div id="publist">
+						<table width="100%"><tbody>
+						<tr  width="958px" style="padding:0;margin:5px;height:13px;">
+						<td valign="top" colspan="2" style="border: solid #e0e0a0 1px;padding: 1px;margin: 1px;text-align: center; " bgColor="#909090">
+							<div><b>Publications:</b></div>
+						</td>
+						</tr>
 					<% 
 					if(item.getDbPapers()!=null){
 					DbPaper[] pubs=(DbPaper[])item.getDbPapers().toArray(new DbPaper[0]);
@@ -153,41 +157,29 @@
 					{
 						DbPaper ttm = new DbPaper();
 						ttm = pubs[i];
-						
-						if(i%2==0){
 					%>
 					<tr>
-					<%}else{ %>
-					<tr bgcolor="#eeeeee">
-					<%} %>
-						<td>
-						<div id="publist">
-							<strong>
-								<a class="url" href="<%=path %>/PaperItemShow?fid=<%=ttm.getId() %>">
-								<%=ttm.getTitle() %>
-								</a>
-
-							</strong>
-							<br/>
-							<li>
+							<td valign="top">[<%=i+1 %>]</td>
+							<td>
 							<%
 							DbAuthor []authors=(DbAuthor [])ttm.getDbAuthors().toArray(new DbAuthor[0]);
 							for(int j=0;j<authors.length-1;j++)
 							{
 							%>
-								<a href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
+								<a class="url" href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
 							<%}%>
-							<a href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a> 
-							<br/></li>
-
-						</div>
-						</td>
-					</tr>
-					<%}} %>
+							<a class="url" href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a>.  
+								<b><a href="<%=path %>/PaperItemShow?fid=<%=ttm.getId() %>">
+								<%=ttm.getTitle() %>
+								</a></b>
+							
+							</td></tr>
+					<%}}%>
 					</table>
 		</div>
 		</div>
 		</div>
+		<jsp:include page="/topicAssociateShowAuthor.jsp"></jsp:include>
 		<jsp:include page="/common/footer.jsp"></jsp:include>
 	</body>
 </html>

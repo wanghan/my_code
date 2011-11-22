@@ -1051,6 +1051,9 @@ div.panel {
 	width: 600px;
 	float: left;
 }
+#center_panel {
+	width: 600px;
+}
 
 #right_panel {
 	width: 340px;

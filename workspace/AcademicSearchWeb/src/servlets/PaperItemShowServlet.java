@@ -55,17 +55,17 @@ public class PaperItemShowServlet extends HttpServlet {
 		list = (ArrayList<DbPaper>) request.getSession().getAttribute("list");
 		int id = Integer.parseInt(request.getParameter("fid"));
 
-		if (list == null || id < 0) {
-
-			Err(request, response, "paper id null or empty!");
-		}
-
 		DbPaper Item = null;
-		for (DbPaper paper : list) {
-			if (paper.getId() == id) {
-				Item = paper;
-				break;
+		
+		if (list!=null) {
+
+			for (DbPaper paper : list) {
+				if (paper.getId() == id) {
+					Item = paper;
+					break;
+				}
 			}
+
 		}
 
 		if (Item == null) {

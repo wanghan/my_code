@@ -38,24 +38,21 @@ function sub(str){
 }  
 </script>
 <% 
-
+	String keyword=(String)request.getSession().getAttribute("searchText");
 	ArrayList<DbPaper> list = (ArrayList<DbPaper>)request.getSession().getAttribute("list");
 	request.setAttribute("list",list);
 %>
 <body>
-	<jsp:include page="/common/header_search.jsp"></jsp:include>
-	<center>
-	<div class="bodyDiv">
-
-<table width="100%">
+	<div style="border: solid 1px #6fbee7; margin-bottom: 20px; float: left; width : 65%;">
+    <table width="100%">
 	<tr>
 		<td width="" valign="top">
-			Search Time:<font color="red">${(e-s)/1000.0 }</font>s
+			Paper Search Time:<font color="red">${(e-s)/1000.0 }</font>s
 			<hr color="#6699CC"/>
 			<!-- 搜索结果显示 -->
 			<c:choose>
 				<c:when test="${fn:length(list)==0}">
-					<font size="7" color="red">Result is Null!</font>
+					<font size="4" color="red">Sorry, no searched papers for <%=keyword %></font>
 				</c:when>
 				<c:otherwise>
 					<table width="100%">
@@ -65,13 +62,8 @@ function sub(str){
 					{
 						DbPaper ttm = new DbPaper();
 						ttm = list.get(i);
-						
-						if(i%2==0){
 					%>
 					<tr>
-					<%}else{ %>
-					<tr bgcolor="#eeeeee">
-					<%} %>
 						<td>
 						<div id="publist">
 							<strong>
@@ -81,8 +73,7 @@ function sub(str){
 
 							</strong>
 							<br/>
-							<br/>
-							<li><span>Authors:</span>    
+							<li>Authors: 
 							<%
 							DbAuthor []authors=(DbAuthor [])ttm.getDbAuthors().toArray(new DbAuthor[0]);
 							for(int j=0;j<authors.length-1;j++)
@@ -91,9 +82,9 @@ function sub(str){
 								<a href="<%=path %>/authorItemShow?fid=<%=authors[j].getId()%>"><%=authors[j].getName()%></a>, 
 							<%}%>
 							<a href="<%=path %>/authorItemShow?fid=<%=authors[authors.length-1].getId()%>"><%=authors[authors.length-1].getName()%></a> 
-							<br/></li>
-							<li><span>Proceedings:</span>   <%="\t\t"+ttm.getDbConference().getName() %><br/></li>
-							<li><span>Published year:</span>    <%="\t\t"+ttm.getDbConference().getDate()%></li>
+							</li>
+							<li>Proceedings:   <%="\t\t"+ttm.getDbConference().getName() %><br/></li>
+							<li>Published year:    <%="\t\t"+String.valueOf(1900+ttm.getDbConference().getDate().getYear())%></li>
 
 						</div>
 						</td>
@@ -104,31 +95,31 @@ function sub(str){
 							<td width="100%" align="center">
 								<c:set value="1" var="abc"></c:set>
 								<c:choose>
-									<c:when test="${nowpage==1}">
+									<c:when test="${sessionScope.nowpage==1}">
 										<font color="#888888">第一页  上一页</font>
 									</c:when>
 									<c:otherwise>
-										<a href="<%=path %>/TextSearch?id=1">第一页</a>
-										<a href="<%=path %>/TextSearch?id=${nowpage-1 }">上一页</a>
+										<a href="<%=path %>/SearchResult?id=1">第一页</a>
+										<a href="<%=path %>/SearchResult?id=${sessionScope.nowpage-1 }">上一页</a>
 									</c:otherwise>
 								</c:choose>
 								<c:forEach begin="1" end="${sessionScope.totPage}" var="i">
 									<c:choose>
-										<c:when test="${nowpage==i}">
+										<c:when test="${sessionScope.nowpage==i}">
 											<font color="red">${i }</font>
 										</c:when>
 										<c:otherwise>
-											<a href="<%=path %>/PaperSearch?id=${i }">${i }</a>
+											<a href="<%=path %>/SearchResult?id=${i }">${i }</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 								<c:choose>
-									<c:when test="${nowpage==sessionScope.totPage}">
+									<c:when test="${sessionScope.nowpage==sessionScope.totPage}">
 										<font color="#888888">下一页  最后一页</font>
 									</c:when>
 									<c:otherwise>
-										<a href="<%=path %>/PaperSearch?id=${nowpage+1 }">下一页</a>
-										<a href="<%=path %>/PaperSearch?id=${sessionScope.totPage }">最后一页</a>
+										<a href="<%=path %>/SearchResult?id=${sessionScope.nowpage+1 }">下一页</a>
+										<a href="<%=path %>/SearchResult?id=${sessionScope.totPage }">最后一页</a>
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -136,9 +127,8 @@ function sub(str){
 					</table>
 				</c:otherwise>
 			</c:choose>
-		
-</table>	
+		</table>
+		</table>	
 	</div>
-	<jsp:include page="/common/footer.jsp"></jsp:include>
 </body>
 </html>

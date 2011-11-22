@@ -1,7 +1,6 @@
 package servlets;
 
 import hibernate.DbAuthor;
-import hibernate.DbPaper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import client.rmi.SearchRMIClient;
 
-public class PaperSearchServlet extends HttpServlet {
+public class AuthorSearchServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public PaperSearchServlet() {
+	public AuthorSearchServlet() {
 		super();
 	}
 
@@ -54,7 +53,7 @@ public class PaperSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int ps = 1;
-		String n = request.getParameter("id");
+		String n = request.getParameter("author_id");
 		try {
 			ps = Integer.parseInt(n);
 		} catch (Exception e) {
@@ -66,22 +65,22 @@ public class PaperSearchServlet extends HttpServlet {
 
 		long s = System.currentTimeMillis();
 
-		List<DbPaper> result = (List<DbPaper>) request.getSession()
-				.getAttribute("result");
-		List<DbPaper> list = this.TISList(start, result);
+		List<DbAuthor> result = (List<DbAuthor>) request.getSession()
+				.getAttribute("author_result");
+		List<DbAuthor> list = this.TISListForAuthor(start, result);
 		long e = System.currentTimeMillis();
-		request.setAttribute("s", s);// begin time
-		request.setAttribute("e", e);// end time
+		request.setAttribute("author_s", s);// begin time
+		request.setAttribute("author_e", e);// end time
 
 		// 显示内容实体
-		request.getSession().removeAttribute("list");
-		request.getSession().setAttribute("list", list);
+		request.getSession().removeAttribute("author_list");
+		request.getSession().setAttribute("author_list", list);
 		// 当前页
-		request.getSession().setAttribute("nowpage", ps);
+		request.getSession().setAttribute("author_nowpage", ps);
 		// ==================================================
 
 		RequestDispatcher disp = request
-				.getRequestDispatcher("/paperResults.jsp");
+				.getRequestDispatcher("/authorResults.jsp");
 		disp.include(request, response);
 	}
 
@@ -111,15 +110,17 @@ public class PaperSearchServlet extends HttpServlet {
 		System.out.println("searching keywords "+searchText);
 		request.getSession().setAttribute("searchText", searchText); 
 		
+		//search authors
+		
 		// 声明检索开始时间
-		long s = System.currentTimeMillis();
+		long author_s = System.currentTimeMillis();
 
-		List<DbPaper> result=null;
+		List<DbAuthor> author_result=null;
 		
 		try {
-			result=SearchRMIClient.getInstance().searchPapers(searchText);
+			author_result=SearchRMIClient.getInstance().searchAuthors(searchText);
 
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			// TODO: handle exception
 			System.out.println("RMI error，please check the search service");
 			Err(request, response);
@@ -128,9 +129,9 @@ public class PaperSearchServlet extends HttpServlet {
 
 		// 返回页面结果参数
 
-		if (result != null && result.size() != 0) {
-			System.out.println("result number：" + result.size());
-		} else if (result != null && result.size() == 0) {
+		if (author_result != null && author_result.size() != 0) {
+			System.out.println("result number：" + author_result.size());
+		} else if (author_result != null && author_result.size() == 0) {
 			System.out.println("result is null");
 		} else {
 			System.out.println("result error!");
@@ -139,41 +140,46 @@ public class PaperSearchServlet extends HttpServlet {
 		}
 
 		// 声明检索结束时间
-		long e = System.currentTimeMillis();
+		long author_e = System.currentTimeMillis();
 
-		ArrayList<DbPaper> list = new ArrayList<DbPaper>();
-		if (result != null)
-			list = this.TISList(0, result);		
 		
-		request.getSession().setAttribute("result", result); 
+		ArrayList<DbAuthor> list = new ArrayList<DbAuthor>();
+		if (author_result != null)
+			list = this.TISListForAuthor(0, author_result);		
+		
+		request.getSession().setAttribute("author_result", author_result); 
 
-		request.setAttribute("s", s);// begin time
-		request.setAttribute("e", e);// end time
+		request.setAttribute("author_s", author_s);// begin time
+		request.setAttribute("author_e", author_e);// end time
 
+		request.getSession().setAttribute("searchText", searchText); 
+		request.getSession().setAttribute("author_totPage",
+				(author_result.size() - 1) / pageSize + 1); // total page
 
-		request.getSession().setAttribute("totPage",
-				(result.size() - 1) / pageSize + 1); // total page
+		// ==================================================
+		request.getSession().removeAttribute("list");
 
 		// current page
-		request.setAttribute("nowpage", 1);
-		request.getSession().removeAttribute("list");
-		request.getSession().setAttribute("list", list);
+		request.getSession().setAttribute("author_nowpage", 1);
+		request.getSession().removeAttribute("author_list");
+		request.getSession().setAttribute("author_list", list);
 		
 		RequestDispatcher disp = request
-				.getRequestDispatcher("/paperResults.jsp");
+				.getRequestDispatcher("/authorResults.jsp");
 		disp.include(request, response);
 
 	}
 
 	int pageSize = 10;
 
+	
 	/**
 	 * split the page
 	 * start: start index
 	 * */
-	public ArrayList<DbPaper> TISList(int start, List<DbPaper> results) {
+	public ArrayList<DbAuthor> TISListForAuthor(int start, List<DbAuthor> results) {
 		
-		ArrayList<DbPaper> list = new ArrayList<DbPaper>();
+		ArrayList<DbAuthor> list = new ArrayList<DbAuthor>();
 
 		if (start < 0) {
 			start = 0;
@@ -182,7 +188,7 @@ public class PaperSearchServlet extends HttpServlet {
 		if (results != null && results.size() != 0 && start >= 0) {
 			// int c=(a<b)?a:b;
 			int num = (results.size() < this.pageSize) ? results.size() : this.pageSize;
-			ArrayList<Integer> keys = new ArrayList<Integer>();
+			ArrayList<Long> keys = new ArrayList<Long>();
 			
 			if (start < results.size() - this.pageSize) {
 				for (int i = start; i < start + num; i++) {
@@ -219,13 +225,13 @@ public class PaperSearchServlet extends HttpServlet {
 		}
 		return null;
 	}
-
+	
 	public void Err(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<DbPaper> list = new ArrayList<DbPaper>();
+		ArrayList<DbAuthor> list = new ArrayList<DbAuthor>();
 		RequestDispatcher disp = request
-		.getRequestDispatcher("/paperResults.jsp");
+		.getRequestDispatcher("/authorResults.jsp");
 disp.include(request, response);
 	}
 
