@@ -1,8 +1,6 @@
 package hibernate;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Example;

@@ -47,7 +47,7 @@ function sub(str){
 	<table width="100%">
 	<tr>
 		<td width="" valign="top">
-			Author Search Time:<font color="red">${(author_e-author_s)/1000.0 }</font>s
+			Search Authors for <b><%=keyword %></b> in <font color="red">${(author_e-author_s)/1000.0 }</font>s
 			<hr color="#6699CC"/>
 			<!-- 搜索结果显示 -->
 			<c:choose>

@@ -21,6 +21,10 @@ public class Client {
 			
 			SearcherRMIInterface searcher=(SearcherRMIInterface)Naming.lookup("//localhost:1099/searcher");
 			
+			Integer [] result=searcher.searchPapers("image retrieval");
+			
+			System.out.println(result.length);
+			
 //			testSearchPaper(searcher);
 //			testSearchAuthor(searcher);
 			

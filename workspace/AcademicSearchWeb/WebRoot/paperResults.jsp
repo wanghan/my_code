@@ -47,7 +47,7 @@ function sub(str){
     <table width="100%">
 	<tr>
 		<td width="" valign="top">
-			Paper Search Time:<font color="red">${(e-s)/1000.0 }</font>s
+			Search Papers for <b><%=keyword %></b> in <font color="red">${(e-s)/1000.0 }</font>s
 			<hr color="#6699CC"/>
 			<!-- 搜索结果显示 -->
 			<c:choose>

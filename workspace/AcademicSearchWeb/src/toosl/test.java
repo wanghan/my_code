@@ -8,14 +8,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -24,8 +17,6 @@ import org.hibernate.criterion.Restrictions;
 import client.rmi.SearchRMIClient;
 
 import rmi.SearcherRMIInterface;
-
-import dao.hibernate.HibernateUtil;
 
 public class test {
 

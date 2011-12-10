@@ -1,10 +1,8 @@
 package servlets;
 
-import hibernate.DbAuthor;
 import hibernate.DbPaper;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
