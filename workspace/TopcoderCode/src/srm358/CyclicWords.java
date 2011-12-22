@@ -9,6 +9,7 @@ public class CyclicWords {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//test for ssl
 
 	}
 	public int differentCW(String[] words){
