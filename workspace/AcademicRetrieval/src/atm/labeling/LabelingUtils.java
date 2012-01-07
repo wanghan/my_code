@@ -63,7 +63,7 @@ public class LabelingUtils {
 				if(line==null){
 					break;
 				}
-				StringTokenizer st=new StringTokenizer(line);
+				StringTokenizer st=new StringTokenizer(line," ");
 				String firstToken=st.nextToken();
 				
 				String[] tokens=firstToken.split("<>");
@@ -78,11 +78,14 @@ public class LabelingUtils {
 					sb.append(tokens[i]+" ");
 					
 				}
+				double score=Double.parseDouble(st.nextToken());
+				
 				if(goodLabel){
 					Parse parse=new Parse(sb.toString().trim());
 					if(parse.tokens.size()>1){
 						candidateLabels.add(parse);
-					}	
+					}
+					parse.score=score;
 				}
 
 			}

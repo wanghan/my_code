@@ -9,7 +9,7 @@
 		DbAuthor item = (DbAuthor) request.getAttribute("author");
 		String imagepath="/profile/no_image.jpg";
 		String newPath="/profile/"+String.valueOf(item.getId())+".jpg";
-		String realPath="H:/author_profile/"+String.valueOf(item.getId())+".jpg";
+		String realPath="E:/author_profile/"+String.valueOf(item.getId())+".jpg";
 		if(new File(realPath).exists()){
 			imagepath=newPath;
 		} 

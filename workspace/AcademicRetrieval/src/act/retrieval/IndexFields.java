@@ -20,4 +20,12 @@ public interface IndexFields {
 	public String AuthorACMIndex="authorIndex";
 	
 	public String ConferenceIndex="confIndex";
+	
+	
+	//
+	
+	public String LF_FILEPATH = "lf_path";
+	public String ID = "id";
+	public String FILENAME = "filename";
+	public String FILEPATH = "filepath";
 }

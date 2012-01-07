@@ -12,6 +12,7 @@ public class Parse implements Serializable{
 	private static final long serialVersionUID = 4115618816653256621L;
 	public Vector<String> tokens;
 	private String parseString;
+	public double score;
 	
 	public Parse(String s) {
 		// TODO Auto-generated constructor stub

@@ -71,7 +71,7 @@ List<TopicAssociate> item = (List<TopicAssociate>)request.getAttribute("TopicAss
 															<%
 															String imagepath="/profile/no_image.jpg";
 															String newPath="/profile/"+String.valueOf(ttm.getId())+".jpg";
-															String realPath="H:/author_profile/"+String.valueOf(ttm.getId())+".jpg";
+															String realPath="E:/author_profile/"+String.valueOf(ttm.getId())+".jpg";
 															if(new File(realPath).exists()){
 																imagepath=newPath;
 															} 
@@ -91,7 +91,7 @@ List<TopicAssociate> item = (List<TopicAssociate>)request.getAttribute("TopicAss
 															<%
 															String imagepath="/profile/no_image.jpg";
 															String newPath="/profile/"+String.valueOf(ttm.getId())+".jpg";
-															String realPath="H:/author_profile/"+String.valueOf(ttm.getId())+".jpg";
+															String realPath="E:/author_profile/"+String.valueOf(ttm.getId())+".jpg";
 															if(new File(realPath).exists()){
 																imagepath=newPath;
 															} 
